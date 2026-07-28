@@ -40,11 +40,22 @@
   .module::before{ top:-1px; left:-1px; border-top:1px solid var(--cyan); border-left:1px solid var(--cyan); }
   .module::after{ bottom:-1px; right:-1px; border-bottom:1px solid var(--cyan); border-right:1px solid var(--cyan); }
 
-  .hero{ padding:14px 24px 15px; margin-bottom:6px; }
+  .hero{ display:flex; justify-content:space-between; align-items:center; gap:22px; padding:14px 24px 15px; margin-bottom:6px; }
+  .hero-main{ flex:1; min-width:0; }
   .date-tag{ font-size:9.5px; letter-spacing:3px; color:var(--cyan); margin-bottom:7px; }
   .date-tag::before{ content:"◈ "; }
   .headline{ font-size:clamp(16px,2.2vw,20px); font-weight:300; line-height:1.35; color:var(--text); max-width:660px; }
   .headline .accent{ color:var(--cyan); font-weight:400; }
+
+  /* Office HQ — rotating 3D wireframe, small HUD chip */
+  .office-wrap{ flex-shrink:0; text-align:center; }
+  .office-label{ font-size:7.5px; letter-spacing:1.5px; color:var(--cyan-dim); margin-bottom:6px; }
+  .office-box{ width:92px; height:92px; overflow:hidden; }
+  .office-box iframe{ width:100%; height:100%; border:0; display:block; pointer-events:none; background:#05070a; }
+  @media (max-width:640px){
+    .hero{ flex-direction:column; align-items:flex-start; }
+    .office-wrap{ align-self:center; margin-top:12px; }
+  }
 
   .section{ margin-top:44px; }
   .section-head{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:9px; margin-bottom:2px; }
@@ -104,26 +115,91 @@
 <body>
 <div class="wrap">
   <div class="topbar">
-    <div class="brand caps"><b>JOJX</b> — Dashboard <span class="brand-date mono">· July 28</span></div>
+    <div class="brand caps"><b>JOJX</b> — Dashboard <span class="brand-date mono">· July 27</span></div>
     <div class="topright">
-      <div class="stamp mono"><span class="livedot"></span>Snapshot · Jul 28, 1:42p PT</div>
+      <div class="stamp mono"><span class="livedot"></span>Snapshot · Jul 27, 4:28p PT</div>
     </div>
   </div>
 
   <div class="hero module">
-    <div class="date-tag caps">Tuesday, July 28, 2026</div>
-    <div class="headline"><span class="accent">Hill's Pet Nutrition</span> awards in 2 days — and today's calendar has three <span class="accent">collisions</span> stacked in the early afternoon.</div>
+    <div class="hero-main">
+      <div class="date-tag caps">Monday, July 27, 2026</div>
+      <div class="headline"><span class="accent">BMW</span> awards in 1 day — and today has a <span class="accent">collision</span> on the calendar.</div>
+    </div>
+    <div class="office-wrap">
+      <div class="office-label caps">Office HQ</div>
+      <div class="office-box module">
+        <iframe src="https://c0jare.github.io/abbot-kinney-office-wireframe/abbot_kinney_office_wireframe.html?embed=1" loading="lazy" title="920 Abbot Kinney — Office HQ wireframe"></iframe>
+      </div>
+    </div>
   </div>
 
   <div class="section cal-grid">
     <div class="cal-col">
-      <div class="section-head"><div class="section-title caps">Today</div><div class="section-count mono">13 EVENTS</div></div>
+      <div class="section-head"><div class="section-title caps">Today</div><div class="section-count mono">06 EVENTS</div></div>
+      <div class="timeline">
+        <div class="tl-row">
+          <div class="tl-time mono">10:00A</div>
+          <div class="tl-spine"><div class="tl-node"></div></div>
+          <div class="tl-body">
+            <div class="tl-title">JOJX Line 1: Team Internal</div>
+            <div class="tl-note">10:00 – 10:30a</div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time mono">12:00P</div>
+          <div class="tl-spine"><div class="tl-node"></div></div>
+          <div class="tl-body">
+            <div class="tl-title">Jackson Website Facelift</div>
+            <div class="tl-note">12:00 – 1:00p</div>
+            <span class="flag pending caps">○ Jackson pending</span>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time mono">2:00P</div>
+          <div class="tl-spine"><div class="tl-node"></div></div>
+          <div class="tl-body">
+            <div class="tl-title">HJ Status</div>
+            <div class="tl-note">2:00 – 2:30p</div>
+          </div>
+        </div>
+        <div class="tl-row collision">
+          <div class="tl-time mono">2:25P</div>
+          <div class="tl-spine"><div class="tl-node"></div></div>
+          <div class="tl-body">
+            <div class="tl-title">Jax with Apple Support</div>
+            <div class="tl-note">2:25 – 2:40p</div>
+          </div>
+        </div>
+        <div class="tl-row collision">
+          <div class="tl-time mono">4:00P</div>
+          <div class="tl-spine"><div class="tl-node"></div></div>
+          <div class="tl-body">
+            <div class="tl-title">JOJX Line 1: End of Day</div>
+            <div class="tl-note">4:00 – 4:30p</div>
+            <span class="flag alert caps">▲ Collision — EP review Jared Clayton work</span>
+          </div>
+        </div>
+        <div class="tl-row collision">
+          <div class="tl-time mono">4:15P</div>
+          <div class="tl-spine"><div class="tl-node"></div></div>
+          <div class="tl-body">
+            <div class="tl-title">EP Review Jared Clayton Work</div>
+            <div class="tl-note">4:15 – 5:15p</div>
+            <span class="flag alert caps">▲ Collision — JOJX Line 1: End of Day</span>
+            <span class="flag pending caps">○ Jackson pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cal-col cal-col-right">
+      <div class="section-head"><div class="section-title caps">On Deck — Tuesday, Jul 28</div><div class="section-count mono">07 EVENTS</div></div>
       <div class="timeline">
         <div class="tl-row">
           <div class="tl-time mono">8:00A</div>
           <div class="tl-spine"><div class="tl-node"></div></div>
           <div class="tl-body">
-            <div class="tl-title">Farmer's Dog x Molly Baz | Scott Perry Creative Call</div>
+            <div class="tl-title">The Farmer's Dog x Molly Baz — Scott Perry Creative Call</div>
             <div class="tl-note">8:00 – 9:00a</div>
           </div>
         </div>
@@ -133,6 +209,7 @@
           <div class="tl-body">
             <div class="tl-title">PR Connect</div>
             <div class="tl-note">9:00 – 10:00a</div>
+            <span class="flag pending caps">○ Olivia pending</span>
           </div>
         </div>
         <div class="tl-row">
@@ -144,77 +221,19 @@
           </div>
         </div>
         <div class="tl-row">
-          <div class="tl-time mono">11:00A</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Jax Computer Fix</div>
-            <div class="tl-note">11:00a – 12:00p</div>
-          </div>
-        </div>
-        <div class="tl-row collision">
           <div class="tl-time mono">12:00P</div>
           <div class="tl-spine"><div class="tl-node"></div></div>
           <div class="tl-body">
             <div class="tl-title">Joe Calls Jordan @ Farmers Dog</div>
             <div class="tl-note">12:00 – 1:00p</div>
-            <span class="flag alert caps">▲ Collision — PRECALL: Ace Norton x Ferrero</span>
-          </div>
-        </div>
-        <div class="tl-row collision">
-          <div class="tl-time mono">12:45P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">PRECALL: Ace Norton x Ferrero</div>
-            <div class="tl-note">12:45 – 1:15p</div>
-            <span class="flag alert caps">▲ Collision — Joe Calls Jordan @ Farmers Dog</span>
-            <span class="flag pending caps">○ Jackson, Acenorton pending</span>
           </div>
         </div>
         <div class="tl-row">
-          <div class="tl-time mono">1:15P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Ace Norton x Ferrero</div>
-            <div class="tl-note">1:15 – 2:15p</div>
-            <span class="flag pending caps">○ Acenorton, Chilo, Lynn pending</span>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">2:15P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">DEBRIEF: Ace Norton x Ferrero</div>
-            <div class="tl-note">2:15 – 2:30p</div>
-            <span class="flag pending caps">○ Jackson, Acenorton pending</span>
-          </div>
-        </div>
-        <div class="tl-row collision">
-          <div class="tl-time mono">2:30P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Lexus Meeting Line</div>
-            <div class="tl-note">2:30 – 3:30p</div>
-            <span class="flag alert caps">▲ Collision — Website Reel Whittle Down</span>
-            <span class="flag alert caps">▲ Collision — Party Planning Committee Weekly Meeting</span>
-            <span class="flag pending caps">○ Mattslater1, Elsa, Perhampus pending</span>
-          </div>
-        </div>
-        <div class="tl-row collision">
-          <div class="tl-time mono">2:30P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Website Reel Whittle Down</div>
-            <div class="tl-note">2:30 – 3:00p</div>
-            <span class="flag alert caps">▲ Collision — Lexus Meeting Line</span>
-          </div>
-        </div>
-        <div class="tl-row collision">
-          <div class="tl-time mono">3:00P</div>
+          <div class="tl-time mono">2:00P</div>
           <div class="tl-spine"><div class="tl-node"></div></div>
           <div class="tl-body">
             <div class="tl-title">Party Planning Committee Weekly Meeting</div>
-            <div class="tl-note">3:00 – 3:30p</div>
-            <span class="flag alert caps">▲ Collision — Lexus Meeting Line</span>
+            <div class="tl-note">2:00 – 2:30p</div>
           </div>
         </div>
         <div class="tl-row">
@@ -231,70 +250,7 @@
           <div class="tl-body">
             <div class="tl-title">HIMS Treatment Walkthrough</div>
             <div class="tl-note">4:00 – 5:00p</div>
-            <span class="flag pending caps">○ Jackson, Jenni, Mccourtmichael pending</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="cal-col cal-col-right">
-      <div class="section-head"><div class="section-title caps">On Deck — Wednesday, Jul 29</div><div class="section-count mono">07 EVENTS</div></div>
-      <div class="timeline">
-        <div class="tl-row">
-          <div class="tl-time mono">9:45A</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Martin Pre Chat</div>
-            <div class="tl-note">9:45 – 10:00a</div>
-            <span class="flag pending caps">○ You pending</span>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">10:00A</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">BIM x Martin Connect</div>
-            <div class="tl-note">10:00 – 11:00a</div>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">11:00A</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">JOJX Line 1: Team Internal</div>
-            <div class="tl-note">11:00 – 11:30a</div>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">12:00P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Joe Finalize DGA Audit Stuff</div>
-            <div class="tl-note">12:00 – 1:00p</div>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">1:30P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">HOLD: Michael McCourt/JOJX — H&amp;Hs Treatment</div>
-            <div class="tl-note">1:30 – 2:30p</div>
-            <span class="flag pending caps">○ Mccourtmichael pending</span>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">4:00P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">JOJX Line 1: End of Day</div>
-            <div class="tl-note">4:00 – 4:30p</div>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">6:30P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Elvie Dinner — Sevi NA</div>
-            <div class="tl-note">6:30 – 10:30p</div>
+            <span class="flag pending caps">○ Jackson, Jenni, McCourt pending</span>
           </div>
         </div>
       </div>
@@ -302,15 +258,31 @@
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-title caps">Active Bids</div><div class="section-count mono">05 IN PLAY</div></div>
+    <div class="section-head"><div class="section-title caps">Active Bids</div><div class="section-count mono">04 IN PLAY</div></div>
     <div class="cards">
+      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div>
+            <div class="card-job">BMW</div>
+            <div class="card-dir">Dir. Per &nbsp;·&nbsp; EP Joe</div>
+          </div>
+          <div class="ring" style="--pct:94%; --ring-color:var(--alert);"><div class="ring-inner"><div class="num">1</div><div class="lbl">Day</div></div></div>
+        </div>
+        <div class="card-row"><div class="k">Agency</div><div class="v">Goodby S&amp;P</div></div>
+        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Dash Debley / James Horner</div></div>
+        <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">Bid 7/20, Treatment 7/21</div></div>
+        <div class="card-row"><div class="k">Award</div><div class="v">July 28</div></div>
+        <div class="beaten">Also bidding: <b>Martin de Thurah / Epoch & Marcus Ibanez / Iconoclast</b></div>
+        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+      </a>
+
       <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
         <div class="card-top">
           <div>
             <div class="card-job">Hill's Pet Nutrition</div>
             <div class="card-dir">Dir. Scott &nbsp;·&nbsp; EP Joe</div>
           </div>
-          <div class="ring" style="--pct:80%; --ring-color:var(--alert);"><div class="ring-inner"><div class="num">2</div><div class="lbl">Days</div></div></div>
+          <div class="ring" style="--pct:70%;"><div class="ring-inner"><div class="num">3</div><div class="lbl">Days</div></div></div>
         </div>
         <div class="card-row"><div class="k">Agency</div><div class="v">VML</div></div>
         <div class="card-row"><div class="k">Agency Prod</div><div class="v">Melissa Dean Lindsey</div></div>
@@ -326,45 +298,13 @@
             <div class="card-job">Hims</div>
             <div class="card-dir">Dir. McCourt &nbsp;·&nbsp; EP Joe</div>
           </div>
-          <div class="ring" style="--pct:40%;"><div class="ring-inner"><div class="num">6</div><div class="lbl">Days</div></div></div>
+          <div class="ring" style="--pct:30%;"><div class="ring-inner"><div class="num">7</div><div class="lbl">Days</div></div></div>
         </div>
         <div class="card-row"><div class="k">Agency</div><div class="v">Hims (direct)</div></div>
         <div class="card-row"><div class="k">Agency Prod</div><div class="v">Bud Johnson</div></div>
         <div class="card-row"><div class="k">Bid Due</div><div class="v">July 29</div></div>
         <div class="card-row"><div class="k">Award</div><div class="v">August 3</div></div>
         <div class="beaten">Also bidding: <b>Jason Harper @ Park Pictures, Yoni Lopes @ Golden</b></div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
-
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">Ferero</div>
-            <div class="card-dir">Dir. Ace</div>
-          </div>
-          <div class="ring" style="--pct:30%;"><div class="ring-inner"><div class="num">7</div><div class="lbl">Days</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">—</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">—</div></div>
-        <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">August 4</div></div>
-        <div class="card-row"><div class="k">Award</div><div class="v">August 4</div></div>
-        <div class="beaten">Also bidding: <b>TBD</b></div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
-
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">USAA</div>
-            <div class="card-dir">Dir. McCourt &nbsp;·&nbsp; EP Harry</div>
-          </div>
-          <div class="ring" style="--pct:6%;"><div class="ring-inner"><div class="num">16</div><div class="lbl">Days</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">Razorfish</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Allie Hettler</div></div>
-        <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">August 7</div></div>
-        <div class="card-row"><div class="k">Award</div><div class="v">August 13</div></div>
-        <div class="beaten">Also bidding: <b>TBD</b></div>
         <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
       </a>
 
@@ -427,7 +367,7 @@
   <footer class="caps">
     Calendar — JOJX Office &nbsp;·&nbsp;
     <a href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">JOJX Jobs List</a><br>
-    <span style="letter-spacing:0.3px;">Static snapshot as of July 28, 2026, 1:42 PM PT. Not connected to live data — refreshed automatically every 30 minutes.</span>
+    <span style="letter-spacing:0.3px;">Static snapshot as of July 27, 2026, 4:28 PM PT. Not connected to live data — request a refreshed export to update.</span>
   </footer>
 </div>
 </body>
