@@ -97,32 +97,9 @@
   .card-link-hint{ font-size:8.5px; color:var(--grey); letter-spacing:1.5px; text-transform:uppercase; margin-top:auto; padding-top:9px; border-top:1px solid var(--line); font-family:'SF Mono','Roboto Mono',monospace; }
   .card-link-hint span{ color:var(--cyan); }
 
-  .clock-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:4px; }
-  .clock-card{ padding:22px 16px 18px; display:flex; flex-direction:column; align-items:center; gap:11px; }
-  .clock-ring{ position:relative; width:104px; height:104px; border-radius:50%;
-    background:conic-gradient(var(--cyan) var(--pct,0%), var(--line) 0); }
-  .clock-ring::before{ content:""; position:absolute; inset:6px; border-radius:50%; background:var(--bg); }
-  .clock-inner{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  .clock-time{ font-size:17px; color:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; line-height:1; }
-  .clock-time .ampm{ font-size:9px; margin-left:2px; color:var(--cyan-dim); }
-  .clock-tz{ font-size:7.5px; color:var(--grey); letter-spacing:1.5px; margin-top:4px; }
-  .clock-city{ font-size:10.5px; letter-spacing:2px; }
-  @media (max-width:680px){ .clock-grid{ grid-template-columns:1fr 1fr 1fr; gap:8px; } .clock-ring{ width:78px; height:78px; } .clock-time{ font-size:13px; } }
-
-  .chip-panel{ padding:20px 22px; }
-  .chip-row{ display:flex; flex-wrap:wrap; gap:9px; margin-top:14px; }
-  .chip{ font-size:9.5px; letter-spacing:1px; text-transform:uppercase; padding:7px 12px; border:1px solid var(--line); color:var(--text); font-family:'SF Mono','Roboto Mono',monospace; }
-  .chip b{ color:var(--cyan); font-weight:400; margin-right:6px; }
-
-  .radar-panel{ padding:22px; display:flex; flex-wrap:wrap; align-items:center; gap:24px; }
-  .radar-panel svg{ flex-shrink:0; }
-  .radar-legend{ display:flex; flex-direction:column; gap:10px; min-width:160px; }
-  .radar-legend .rl-row{ font-size:11px; display:flex; justify-content:space-between; gap:14px; border-bottom:1px solid var(--line); padding-bottom:8px; }
-  .radar-legend .rl-k{ color:var(--grey); letter-spacing:1px; text-transform:uppercase; font-size:9.5px; padding-top:2px; }
-  .radar-legend .rl-v{ color:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; font-size:14px; }
-
   footer{ margin-top:56px; padding-top:15px; border-top:1px solid var(--line); font-size:9.5px; color:var(--grey); line-height:1.8; letter-spacing:0.3px; }
   footer a{ color:var(--cyan); text-decoration:none; }
+  .snap-note{ border:1px solid rgba(227,192,126,0.4); color:var(--amber); font-size:10.5px; padding:9px 14px; margin-bottom:24px; letter-spacing:0.3px; font-family:'SF Mono','Roboto Mono',monospace; }
 </style>
 </head>
 <body>
@@ -130,13 +107,13 @@
   <div class="topbar">
     <div class="brand caps"><b>JOJX</b> — Dashboard <span class="brand-date mono">· July 29</span></div>
     <div class="topright">
-      <div class="stamp mono"><span class="livedot"></span>Snapshot · Jul 29, 1:52p PT</div>
+      <div class="stamp mono"><span class="livedot"></span>Live · Jul 29, 2:07p PT</div>
     </div>
   </div>
 
   <div class="hero module">
     <div class="date-tag caps">Wednesday, July 29, 2026</div>
-    <div class="headline"><span class="accent">Hill's Pet Nutrition</span> awards in 1 day — and tomorrow has a <span class="accent">collision</span> between Power Crunch Bid Connect and JOJX Line 1: Team Internal.</div>
+    <div class="headline"><span class="accent">Hill's Pet Nutrition</span> awards in 1 day — and tomorrow has a <span class="accent">collision</span> on the calendar between Power Crunch Bid Connect and JOJX Line 1: Team Internal, both landing at 10a.</div>
   </div>
 
   <div class="section cal-grid">
@@ -156,7 +133,7 @@
           <div class="tl-time mono">9:45A</div>
           <div class="tl-spine"><div class="tl-node"></div></div>
           <div class="tl-body">
-            <div class="tl-title">Martin Pre chat</div>
+            <div class="tl-title">Martin Pre Chat</div>
             <div class="tl-note">9:45 – 10:00a</div>
             <span class="flag pending caps">○ You pending</span>
           </div>
@@ -221,7 +198,7 @@
             <div class="tl-title">Power Crunch Bid Connect</div>
             <div class="tl-note">9:30 – 10:30a</div>
             <span class="flag alert caps">▲ Collision — JOJX Line 1: Team Internal</span>
-            <span class="flag pending caps">○ Acenorton, Bodner, Estelle Weir pending</span>
+            <span class="flag pending caps">○ Acenorton, Bodner Stephen, Estelle pending</span>
           </div>
         </div>
         <div class="tl-row collision">
@@ -261,7 +238,7 @@
           <div class="tl-time mono">4:00P</div>
           <div class="tl-spine"><div class="tl-node"></div></div>
           <div class="tl-body">
-            <div class="tl-title">SOHO DTLA - Joe, Jackson, Sevi</div>
+            <div class="tl-title">SOHO DTLA — Joe, Jackson, Sevi</div>
             <div class="tl-note">4:00 – 6:00p</div>
           </div>
         </div>
@@ -307,7 +284,7 @@
       <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
         <div class="card-top">
           <div>
-            <div class="card-job">Power Crunch - Ferraro</div>
+            <div class="card-job">Power Crunch — Ferraro</div>
             <div class="card-dir">Dir. Ace &nbsp;·&nbsp; EP Joe</div>
           </div>
           <div class="ring" style="--pct:6%;"><div class="ring-inner"><div class="num">12</div><div class="lbl">Days</div></div></div>
@@ -324,7 +301,7 @@
         <div class="card-top">
           <div>
             <div class="card-job">USAA</div>
-            <div class="card-dir">Dir. McCourt &nbsp;·&nbsp; EP Harry</div>
+            <div class="card-dir">Dir. McCourt &nbsp;·&nbsp; EP Joe</div>
           </div>
           <div class="ring" style="--pct:6%;"><div class="ring-inner"><div class="num">15</div><div class="lbl">Days</div></div></div>
         </div>
@@ -339,7 +316,7 @@
       <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
         <div class="card-top">
           <div>
-            <div class="card-job">Farmer's Dog — Molly/Jalen</div>
+            <div class="card-job">Farmer's Dog — Molly / Jalen</div>
             <div class="card-dir">Dir. Scott &nbsp;·&nbsp; EP Harry</div>
           </div>
           <div class="ring" style="--pct:0%; --ring-color:var(--grey);"><div class="ring-inner"><div class="tbd">TBD</div><div class="lbl">Award</div></div></div>
@@ -349,7 +326,7 @@
         <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">June 19</div></div>
         <div class="card-row"><div class="k">Award</div><div class="v">Not recorded</div></div>
         <div class="beaten">Also bidding: <b>Single bid</b></div>
-        <div class="stale-note">Due date is 6+ weeks past with no award logged — looks stale, not overdue. Worth a status check.</div>
+        <div class="stale-note">Due date is 5+ weeks past with no award logged — looks stale, not overdue. Worth a status check.</div>
         <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
       </a>
     </div>
@@ -389,72 +366,6 @@
         <div class="beaten">Single bid — no competition to beat</div>
         <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
       </a>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head"><div class="section-title caps">World Clocks</div><div class="section-count mono">03 ZONES</div></div>
-    <div class="clock-grid">
-      <div class="clock-card module">
-        <div class="clock-ring" style="--pct:58%;"><div class="clock-inner"><div class="clock-time mono">1:52<span class="ampm">PM</span></div><div class="clock-tz mono">PDT</div></div></div>
-        <div class="clock-city caps">Los Angeles</div>
-      </div>
-      <div class="clock-card module">
-        <div class="clock-ring" style="--pct:66%;"><div class="clock-inner"><div class="clock-time mono">3:52<span class="ampm">PM</span></div><div class="clock-tz mono">CDT</div></div></div>
-        <div class="clock-city caps">Chicago</div>
-      </div>
-      <div class="clock-card module">
-        <div class="clock-ring" style="--pct:70%;"><div class="clock-inner"><div class="clock-time mono">4:52<span class="ampm">PM</span></div><div class="clock-tz mono">EDT</div></div></div>
-        <div class="clock-city caps">New York</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head"><div class="section-title caps">Jobs In Post</div><div class="section-count mono">14 TRACKED</div></div>
-    <div class="chip-panel module">
-      <div class="chip-row">
-        <span class="chip">Farmer's Dog — Cam</span>
-        <span class="chip">Clorox</span>
-        <span class="chip">Hills</span>
-        <span class="chip">Kohl's</span>
-        <span class="chip">Ghirardelli</span>
-        <span class="chip">Sara Lee</span>
-        <span class="chip">VCU</span>
-        <span class="chip">USAA</span>
-        <span class="chip">Harrah's</span>
-        <span class="chip">Live Nation</span>
-        <span class="chip">Airbnb</span>
-        <span class="chip">LL Bean</span>
-        <span class="chip">Hims</span>
-        <span class="chip">DDxNBA</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head"><div class="section-title caps">Pipeline Balance</div><div class="section-count mono">21 TOTAL</div></div>
-    <div class="radar-panel module">
-      <svg viewBox="0 0 300 220" width="230" height="168">
-        <polygon points="150,68.65 177.15,145.68 122.85,145.68" fill="none" stroke="var(--line)" stroke-width="1"/>
-        <polygon points="150,67.3 204.3,161.35 95.7,161.35" fill="none" stroke="var(--line)" stroke-width="1"/>
-        <polygon points="150,35 232.3,177.5 67.7,177.5" fill="none" stroke="var(--line)" stroke-width="1"/>
-        <line x1="150" y1="130" x2="150" y2="35" stroke="var(--line)" stroke-width="1"/>
-        <line x1="150" y1="130" x2="232.3" y2="177.5" stroke="var(--line)" stroke-width="1"/>
-        <line x1="150" y1="130" x2="67.7" y2="177.5" stroke="var(--line)" stroke-width="1"/>
-        <polygon points="150,106.25 207.6,163.25 141.77,134.75" fill="rgba(143,227,239,0.18)" stroke="var(--cyan)" stroke-width="1.5"/>
-        <circle cx="150" cy="106.25" r="3" fill="var(--cyan)"/>
-        <circle cx="207.6" cy="163.25" r="3" fill="var(--cyan)"/>
-        <circle cx="141.77" cy="134.75" r="3" fill="var(--cyan)"/>
-        <text x="150" y="22" text-anchor="middle" font-family="'SF Mono','Roboto Mono',monospace" font-size="9" fill="var(--grey)" letter-spacing="1">BIDDING</text>
-        <text x="240" y="192" text-anchor="start" font-family="'SF Mono','Roboto Mono',monospace" font-size="9" fill="var(--grey)" letter-spacing="1">IN POST</text>
-        <text x="60" y="192" text-anchor="end" font-family="'SF Mono','Roboto Mono',monospace" font-size="9" fill="var(--grey)" letter-spacing="1">AWARDED</text>
-      </svg>
-      <div class="radar-legend">
-        <div class="rl-row"><div class="rl-k">Bidding</div><div class="rl-v">05</div></div>
-        <div class="rl-row"><div class="rl-k">Awarded</div><div class="rl-v">02</div></div>
-        <div class="rl-row"><div class="rl-k">In Post</div><div class="rl-v">14</div></div>
-      </div>
     </div>
   </div>
 
