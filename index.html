@@ -124,15 +124,20 @@
   .pl-label{ font-size:10px; letter-spacing:2px; color:var(--grey); margin-bottom:16px; }
 
   .balance-total{ font-size:36px; font-weight:400; color:var(--text); line-height:1; font-family:'SF Mono','Roboto Mono',monospace; }
-  .balance-total-lbl{ font-size:8.5px; letter-spacing:2px; color:var(--grey); margin-top:6px; margin-bottom:20px; }
-  .balance-pips{ display:flex; flex-wrap:wrap; gap:11px; align-items:center; }
-  .pip{ width:15px; height:15px; border:1px solid var(--line-strong); transform:rotate(45deg); background:var(--bg); flex-shrink:0; }
-  .pip.bidding{ background:var(--cyan); border-color:var(--cyan); box-shadow:0 0 7px rgba(143,227,239,0.65); }
-  .pip.awarded{ background:var(--amber); border-color:var(--amber); box-shadow:0 0 7px rgba(227,192,126,0.65); }
-  .balance-legend{ display:flex; gap:22px; margin-top:14px; font-size:10.5px; color:var(--text); }
+  .balance-total-lbl{ font-size:8.5px; letter-spacing:2px; color:var(--grey); margin-top:6px; margin-bottom:6px; }
+  .balance-legend{ display:flex; gap:22px; margin-top:10px; font-size:10.5px; color:var(--text); flex-wrap:wrap; }
   .balance-legend .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; margin-right:7px; }
   .dot.cyan{ background:var(--cyan); box-shadow:0 0 5px var(--cyan); }
   .dot.amber{ background:var(--amber); box-shadow:0 0 5px var(--amber); }
+  .dot.grey{ background:var(--grey); box-shadow:0 0 5px var(--grey); }
+
+  .vector-chart{ margin:2px auto 0; display:block; overflow:visible; }
+  .vector-grid{ fill:none; stroke:var(--line); stroke-width:1; }
+  .vector-axis{ stroke:var(--line-strong); stroke-width:1; }
+  .vector-fill{ fill:rgba(143,227,239,0.14); stroke:var(--cyan); stroke-width:1.5; filter:drop-shadow(0 0 4px rgba(143,227,239,0.5)); }
+  .vector-dot{ fill:var(--bg); stroke:var(--cyan); stroke-width:1.5; }
+  .vector-label{ font-size:8.5px; letter-spacing:1.5px; fill:var(--grey); font-family:'Helvetica Neue',Arial,sans-serif; text-transform:uppercase; }
+  .vector-value{ font-size:11px; fill:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; }
 
   .ep-load{ display:flex; flex-direction:column; gap:18px; justify-content:center; flex:1; }
   .ep-row{ display:grid; grid-template-columns:56px 1fr 22px; align-items:center; gap:14px; }
@@ -420,12 +425,28 @@
         <div class="pl-label caps">Pipeline Balance</div>
         <div class="balance-total mono">7</div>
         <div class="balance-total-lbl caps">Active Jobs In Play</div>
-        <div class="balance-pips">
-          <span class="pip bidding"></span><span class="pip bidding"></span><span class="pip bidding"></span><span class="pip bidding"></span><span class="pip bidding"></span><span class="pip awarded"></span><span class="pip awarded"></span>
-        </div>
+        <svg class="vector-chart" viewBox="0 0 220 165" preserveAspectRatio="xMidYMid meet" style="width:100%;max-width:260px;height:auto;">
+          <polygon class="vector-grid" points="110,25 175,137.5 45,137.5"></polygon>
+          <polygon class="vector-grid" points="110,50 153.3,125 66.7,125"></polygon>
+          <polygon class="vector-grid" points="110,75 131.65,112.5 88.35,112.5"></polygon>
+          <line class="vector-axis" x1="110" y1="100" x2="110" y2="25"></line>
+          <line class="vector-axis" x1="110" y1="100" x2="175" y2="137.5"></line>
+          <line class="vector-axis" x1="110" y1="100" x2="45" y2="137.5"></line>
+          <polygon class="vector-fill" points="110,37.5 131.65,112.5 66.7,125"></polygon>
+          <circle class="vector-dot" cx="110" cy="37.5" r="3"></circle>
+          <circle class="vector-dot" cx="131.65" cy="112.5" r="3"></circle>
+          <circle class="vector-dot" cx="66.7" cy="125" r="3"></circle>
+          <text class="vector-label" x="110" y="13" text-anchor="middle">Bidding</text>
+          <text class="vector-value" x="110" y="24" text-anchor="middle">5</text>
+          <text class="vector-label" x="182" y="133" text-anchor="start">Awarded</text>
+          <text class="vector-value" x="182" y="146" text-anchor="start">2</text>
+          <text class="vector-label" x="38" y="133" text-anchor="end">Top EP · Joe</text>
+          <text class="vector-value" x="38" y="146" text-anchor="end">4</text>
+        </svg>
         <div class="balance-legend">
           <span><span class="dot cyan"></span>Bidding · 5</span>
           <span><span class="dot amber"></span>Awarded · 2</span>
+          <span><span class="dot grey"></span>Top EP (Joe) · 4</span>
         </div>
       </div>
       <div class="pl-box module">
