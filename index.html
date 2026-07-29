@@ -40,21 +40,30 @@
   .module::before{ top:-1px; left:-1px; border-top:1px solid var(--cyan); border-left:1px solid var(--cyan); }
   .module::after{ bottom:-1px; right:-1px; border-bottom:1px solid var(--cyan); border-right:1px solid var(--cyan); }
 
-  .hero{ display:flex; justify-content:space-between; align-items:center; gap:22px; padding:14px 24px 15px; margin-bottom:6px; }
-  .hero-main{ flex:1; min-width:0; }
+  .hero{ padding:14px 24px 15px; margin-bottom:6px; }
   .date-tag{ font-size:9.5px; letter-spacing:3px; color:var(--cyan); margin-bottom:7px; }
   .date-tag::before{ content:"◈ "; }
   .headline{ font-size:clamp(16px,2.2vw,20px); font-weight:300; line-height:1.35; color:var(--text); max-width:660px; }
   .headline .accent{ color:var(--cyan); font-weight:400; }
 
-  /* Office HQ — rotating 3D wireframe, small HUD chip */
-  .office-wrap{ flex-shrink:0; text-align:center; }
-  .office-label{ font-size:7.5px; letter-spacing:1.5px; color:var(--cyan-dim); margin-bottom:6px; }
-  .office-box{ width:92px; height:92px; overflow:hidden; }
-  .office-box iframe{ width:100%; height:100%; border:0; display:block; pointer-events:none; background:#05070a; }
-  @media (max-width:640px){
-    .hero{ flex-direction:column; align-items:flex-start; }
-    .office-wrap{ align-self:center; margin-top:12px; }
+  /* Office HQ — rotating 3D wireframe + stats, full facility panel at the bottom */
+  .office-panel{ display:flex; align-items:stretch; gap:0; padding:0; overflow:hidden; }
+  .office-stats{ flex:1; min-width:220px; padding:26px 28px; display:flex; flex-direction:column; justify-content:center; gap:13px; }
+  .office-top{ display:flex; align-items:center; gap:14px; margin-bottom:6px; }
+  .office-title{ font-size:16px; font-weight:400; color:var(--text); letter-spacing:0.3px; }
+  .office-sub{ font-size:8.5px; letter-spacing:1.5px; color:var(--grey); margin-top:3px; }
+  .office-panel .stat-row{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; border-top:1px solid var(--line); padding-top:10px; }
+  .office-panel .stat-k{ font-size:9px; letter-spacing:1.5px; color:var(--grey); text-transform:uppercase; font-family:'SF Mono','Roboto Mono',monospace; }
+  .office-panel .stat-v{ font-size:12px; color:var(--text); text-align:right; }
+  .office-panel .stat-v.mono{ font-family:'SF Mono','Roboto Mono',monospace; color:var(--cyan); font-size:13px; letter-spacing:0.5px; }
+  .dot-on{ width:6px; height:6px; border-radius:50%; background:var(--cyan); display:inline-block; margin-right:6px; box-shadow:0 0 6px var(--cyan); animation:pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+  .office-box-lg{ width:280px; height:280px; flex-shrink:0; overflow:hidden; border-left:1px solid var(--line); }
+  .office-box-lg iframe{ width:100%; height:100%; border:0; display:block; pointer-events:none; background:#05070a; }
+  @media (max-width:680px){
+    .office-panel{ flex-direction:column; }
+    .office-box-lg{ width:100%; height:260px; border-left:none; border-top:1px solid var(--line); }
+    .office-stats{ padding:22px 24px; }
   }
 
   .section{ margin-top:44px; }
@@ -122,16 +131,8 @@
   </div>
 
   <div class="hero module">
-    <div class="hero-main">
-      <div class="date-tag caps">Monday, July 27, 2026</div>
-      <div class="headline"><span class="accent">BMW</span> awards in 1 day — and today has a <span class="accent">collision</span> on the calendar.</div>
-    </div>
-    <div class="office-wrap">
-      <div class="office-label caps">Office HQ</div>
-      <div class="office-box module">
-        <iframe src="https://c0jare.github.io/abbot-kinney-office-wireframe/abbot_kinney_office_wireframe.html?embed=1" loading="lazy" title="920 Abbot Kinney — Office HQ wireframe"></iframe>
-      </div>
-    </div>
+    <div class="date-tag caps">Monday, July 27, 2026</div>
+    <div class="headline"><span class="accent">BMW</span> awards in 1 day — and today has a <span class="accent">collision</span> on the calendar.</div>
   </div>
 
   <div class="section cal-grid">
@@ -364,11 +365,44 @@
     </div>
   </div>
 
+  <div class="section">
+    <div class="section-head"><div class="section-title caps">Facility</div><div class="section-count mono">920 ABBOT KINNEY</div></div>
+    <div class="office-panel module">
+      <div class="office-stats">
+        <div class="office-top">
+          <div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
+          <div>
+            <div class="office-title">920 Abbot Kinney</div>
+            <div class="office-sub caps">Venice, CA 90291 · Office HQ</div>
+          </div>
+        </div>
+        <div class="stat-row"><div class="stat-k">Status</div><div class="stat-v"><span class="dot-on"></span>Active</div></div>
+        <div class="stat-row"><div class="stat-k">Local Time</div><div class="stat-v mono" id="officeClock">—:—</div></div>
+        <div class="stat-row"><div class="stat-k">Zone</div><div class="stat-v">Pacific · PT</div></div>
+        <div class="stat-row"><div class="stat-k">Coordinates</div><div class="stat-v mono">33.9908°N, 118.4695°W</div></div>
+      </div>
+      <div class="office-box-lg">
+        <iframe src="https://c0jare.github.io/abbot-kinney-office-wireframe/abbot_kinney_office_wireframe.html?embed=1" loading="lazy" title="920 Abbot Kinney — Office HQ wireframe"></iframe>
+      </div>
+    </div>
+  </div>
+
   <footer class="caps">
     Calendar — JOJX Office &nbsp;·&nbsp;
     <a href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">JOJX Jobs List</a><br>
     <span style="letter-spacing:0.3px;">Static snapshot as of July 27, 2026, 4:28 PM PT. Not connected to live data — request a refreshed export to update.</span>
   </footer>
 </div>
+<script>
+  (function(){
+    var el = document.getElementById('officeClock');
+    if(!el) return;
+    function tick(){
+      el.textContent = new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
 </body>
 </html>
