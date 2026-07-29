@@ -58,6 +58,24 @@
   .office-panel .stat-v.mono{ font-family:'SF Mono','Roboto Mono',monospace; color:var(--cyan); font-size:13px; letter-spacing:0.5px; }
   .dot-on{ width:6px; height:6px; border-radius:50%; background:var(--cyan); display:inline-block; margin-right:6px; box-shadow:0 0 6px var(--cyan); animation:pulse 2.4s ease-in-out infinite; }
   @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+  .wc-group{ display:flex; gap:16px; }
+  .wc-item{ display:flex; flex-direction:column; align-items:flex-end; gap:3px; }
+  .wc-city{ font-size:7.5px; letter-spacing:1.5px; color:var(--grey); }
+  .wc-time{ font-size:12px; color:var(--cyan); letter-spacing:0.3px; }
+
+  /* Bid Velocity — days-to-award timeline */
+  .velocity-wrap{ position:relative; height:120px; margin:26px 6px 4px; }
+  .velocity-axis{ position:absolute; left:0; right:0; top:50%; height:1px; background:var(--line-strong); }
+  .velocity-tick{ position:absolute; top:calc(50% - 5px); width:1px; height:10px; background:var(--line); }
+  .velocity-tick-lbl{ position:absolute; top:calc(50% + 10px); font-size:8.5px; color:var(--grey); font-family:'SF Mono','Roboto Mono',monospace; transform:translateX(-50%); }
+  .velocity-item{ position:absolute; top:0; bottom:0; display:flex; flex-direction:column; align-items:center; justify-content:center; transform:translateX(-50%); }
+  .velocity-item .vjob{ font-size:9.5px; color:var(--text); white-space:nowrap; margin-bottom:9px; letter-spacing:0.2px; }
+  .velocity-item .vdiamond{ width:11px; height:11px; border:1px solid var(--cyan); background:var(--cyan); transform:rotate(45deg); box-shadow:0 0 7px rgba(143,227,239,0.6); flex-shrink:0; }
+  .velocity-item.urgent .vdiamond{ border-color:var(--alert); background:var(--alert); box-shadow:0 0 7px rgba(255,90,68,0.65); }
+  .velocity-item .vdays{ font-size:10px; color:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; margin-top:9px; }
+  .velocity-item.urgent .vdays{ color:var(--alert); }
+  .velocity-tbd{ margin:10px 6px 0; font-size:9.5px; color:var(--grey); }
+  .velocity-tbd b{ color:var(--text); font-weight:400; }
   .office-box-lg{ width:280px; height:280px; flex-shrink:0; overflow:hidden; border-left:1px solid var(--line); }
   .office-box-lg iframe{ width:100%; height:100%; border:0; display:block; pointer-events:none; background:#05070a; }
   @media (max-width:680px){
@@ -478,13 +496,61 @@
           </div>
         </div>
         <div class="stat-row"><div class="stat-k">Status</div><div class="stat-v"><span class="dot-on"></span>Active</div></div>
-        <div class="stat-row"><div class="stat-k">Local Time</div><div class="stat-v mono" id="officeClock">—:—</div></div>
+        <div class="stat-row">
+          <div class="stat-k">World Clock</div>
+          <div class="wc-group">
+            <div class="wc-item"><span class="wc-city">LA</span><span class="wc-time mono" id="clockLA">—:—</span></div>
+            <div class="wc-item"><span class="wc-city">CHI</span><span class="wc-time mono" id="clockCHI">—:—</span></div>
+            <div class="wc-item"><span class="wc-city">NY</span><span class="wc-time mono" id="clockNY">—:—</span></div>
+          </div>
+        </div>
         <div class="stat-row"><div class="stat-k">Zone</div><div class="stat-v">Pacific · PT</div></div>
         <div class="stat-row"><div class="stat-k">Coordinates</div><div class="stat-v mono">33.9908°N, 118.4695°W</div></div>
       </div>
       <div class="office-box-lg">
         <iframe src="https://c0jare.github.io/abbot-kinney-office-wireframe/abbot_kinney_office_wireframe.html?embed=1" loading="lazy" title="920 Abbot Kinney — Office HQ wireframe"></iframe>
       </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-title caps">Bid Velocity</div><div class="section-count mono">DAYS TO AWARD</div></div>
+    <div class="module" style="padding:10px 24px 22px;">
+      <div class="velocity-wrap">
+        <div class="velocity-axis"></div>
+        <div class="velocity-tick" style="left:0%;"></div>
+        <div class="velocity-tick-lbl" style="left:0%;">0</div>
+        <div class="velocity-tick" style="left:25%;"></div>
+        <div class="velocity-tick-lbl" style="left:25%;">4</div>
+        <div class="velocity-tick" style="left:50%;"></div>
+        <div class="velocity-tick-lbl" style="left:50%;">8</div>
+        <div class="velocity-tick" style="left:75%;"></div>
+        <div class="velocity-tick-lbl" style="left:75%;">12</div>
+        <div class="velocity-tick" style="left:100%;"></div>
+        <div class="velocity-tick-lbl" style="left:100%;">16</div>
+
+        <div class="velocity-item urgent" style="left:6.25%;">
+          <div class="vjob">Hill's Pet Nutrition</div>
+          <div class="vdiamond"></div>
+          <div class="vdays">1d</div>
+        </div>
+        <div class="velocity-item" style="left:31.25%;">
+          <div class="vjob">Hims</div>
+          <div class="vdiamond"></div>
+          <div class="vdays">5d</div>
+        </div>
+        <div class="velocity-item" style="left:75%;">
+          <div class="vjob">Power Crunch — Ferraro</div>
+          <div class="vdiamond"></div>
+          <div class="vdays">12d</div>
+        </div>
+        <div class="velocity-item" style="left:93.75%;">
+          <div class="vjob">USAA</div>
+          <div class="vdiamond"></div>
+          <div class="vdays">15d</div>
+        </div>
+      </div>
+      <div class="velocity-tbd">Not plotted — award date TBD: <b>Farmer's Dog — Molly / Jalen</b></div>
     </div>
   </div>
 
@@ -496,10 +562,17 @@
 </div>
 <script>
   (function(){
-    var el = document.getElementById('officeClock');
-    if(!el) return;
+    var zones = [
+      {id:'clockLA', tz:'America/Los_Angeles'},
+      {id:'clockCHI', tz:'America/Chicago'},
+      {id:'clockNY', tz:'America/New_York'}
+    ];
     function tick(){
-      el.textContent = new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());
+      zones.forEach(function(z){
+        var el = document.getElementById(z.id);
+        if(!el) return;
+        el.textContent = new Intl.DateTimeFormat('en-US',{timeZone:z.tz,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());
+      });
     }
     tick();
     setInterval(tick, 1000);
