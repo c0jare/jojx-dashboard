@@ -5,562 +5,562 @@
 <title>JOJX — Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  :root{ color-scheme: light;
-    --bg:#0a0d10; --panel:#0d1114; --line:rgba(143,227,239,0.16); --line-strong:rgba(143,227,239,0.42);
-    --cyan:#8fe3ef; --cyan-dim:#4c6b70; --amber:#e3c07e; --alert:#ff5a44; --text:#d7eef2; --grey:#5f7378;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{ background:var(--bg); }
-  body{
-    color:var(--text);
-    font-family:'Helvetica Neue',Arial,sans-serif;
-    font-weight:300;
-    padding:36px 22px 70px;
-    min-height:100vh;
-    -webkit-font-smoothing:antialiased;
-    background-image:
-      radial-gradient(rgba(143,227,239,0.07) 1px, transparent 1px);
-    background-size:22px 22px;
-    background-position:-4px -4px;
-  }
-  .wrap{ max-width:940px; margin:0 auto; }
-  .mono{ font-family:'SF Mono','Roboto Mono',Consolas,monospace; }
-  .caps{ text-transform:uppercase; letter-spacing:2px; }
+:root{ color-scheme: light;
+--bg:#0a0d10; --panel:#0d1114; --line:rgba(143,227,239,0.16); --line-strong:rgba(143,227,239,0.42);
+--cyan:#8fe3ef; --cyan-dim:#4c6b70; --amber:#e3c07e; --alert:#ff5a44; --text:#d7eef2; --grey:#5f7378;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{ background:var(--bg); }
+body{
+color:var(--text);
+font-family:'Helvetica Neue',Arial,sans-serif;
+font-weight:300;
+padding:36px 22px 70px;
+min-height:100vh;
+-webkit-font-smoothing:antialiased;
+background-image:
+radial-gradient(rgba(143,227,239,0.07) 1px, transparent 1px);
+background-size:22px 22px;
+background-position:-4px -4px;
+}
+.wrap{ max-width:940px; margin:0 auto; }
+.mono{ font-family:'SF Mono','Roboto Mono',Consolas,monospace; }
+.caps{ text-transform:uppercase; letter-spacing:2px; }
 
-  .topbar{ display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; border-bottom:1px solid var(--line); margin-bottom:30px; }
-  .brand{ font-size:12px; letter-spacing:4px; color:var(--text); }
-  .brand b{ color:var(--cyan); font-weight:600; }
-  .brand-date{ color:var(--cyan-dim); letter-spacing:1px; margin-left:4px; }
-  .topright{ display:flex; align-items:center; gap:16px; }
-  .livedot{ width:6px; height:6px; border-radius:50%; background:var(--amber); display:inline-block; margin-right:7px; }
-  .stamp{ font-size:10px; color:var(--grey); letter-spacing:1px; }
+.topbar{ display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; border-bottom:1px solid var(--line); margin-bottom:30px; }
+.brand{ font-size:12px; letter-spacing:4px; color:var(--text); }
+.brand b{ color:var(--cyan); font-weight:600; }
+.brand-date{ color:var(--cyan-dim); letter-spacing:1px; margin-left:4px; }
+.topright{ display:flex; align-items:center; gap:16px; }
+.livedot{ width:6px; height:6px; border-radius:50%; background:var(--amber); display:inline-block; margin-right:7px; }
+.stamp{ font-size:10px; color:var(--grey); letter-spacing:1px; }
 
-  .module{ position:relative; border:1px solid var(--line); }
-  .module::before,.module::after{ content:""; position:absolute; width:10px; height:10px; }
-  .module::before{ top:-1px; left:-1px; border-top:1px solid var(--cyan); border-left:1px solid var(--cyan); }
-  .module::after{ bottom:-1px; right:-1px; border-bottom:1px solid var(--cyan); border-right:1px solid var(--cyan); }
+.module{ position:relative; border:1px solid var(--line); }
+.module::before,.module::after{ content:""; position:absolute; width:10px; height:10px; }
+.module::before{ top:-1px; left:-1px; border-top:1px solid var(--cyan); border-left:1px solid var(--cyan); }
+.module::after{ bottom:-1px; right:-1px; border-bottom:1px solid var(--cyan); border-right:1px solid var(--cyan); }
 
-  .hero{ padding:14px 24px 15px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:flex-start; gap:24px; }
-  .hero-main{ flex:1; min-width:0; }
-  .date-tag{ font-size:9.5px; letter-spacing:3px; color:var(--cyan); margin-bottom:7px; }
-  .date-tag::before{ content:"◈ "; }
-  .headline{ font-size:clamp(16px,2.2vw,20px); font-weight:300; line-height:1.35; color:var(--text); max-width:660px; }
-  .hero-next{ flex-shrink:0; text-align:right; padding-left:20px; border-left:1px solid var(--line); }
-  .hero-next-lbl{ font-size:8px; letter-spacing:2px; color:var(--grey); }
-  .hero-next-time{ font-size:20px; color:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; margin-top:4px; line-height:1; }
-  .hero-next-job{ font-size:9.5px; color:var(--text); margin-top:5px; max-width:150px; }
-  @media (max-width:680px){
-    .hero{ flex-direction:column; }
-    .hero-next{ border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:12px; margin-top:12px; text-align:left; width:100%; }
-  }
-  .headline .accent{ color:var(--cyan); font-weight:400; }
+.hero{ padding:14px 24px 15px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:flex-start; gap:24px; }
+.hero-main{ flex:1; min-width:0; }
+.date-tag{ font-size:9.5px; letter-spacing:3px; color:var(--cyan); margin-bottom:7px; }
+.date-tag::before{ content:"◈ "; }
+.headline{ font-size:clamp(16px,2.2vw,20px); font-weight:300; line-height:1.35; color:var(--text); max-width:660px; }
+.hero-next{ flex-shrink:0; text-align:right; padding-left:20px; border-left:1px solid var(--line); }
+.hero-next-lbl{ font-size:8px; letter-spacing:2px; color:var(--grey); }
+.hero-next-time{ font-size:20px; color:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; margin-top:4px; line-height:1; }
+.hero-next-job{ font-size:9.5px; color:var(--text); margin-top:5px; max-width:150px; }
+@media (max-width:680px){
+.hero{ flex-direction:column; }
+.hero-next{ border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:12px; margin-top:12px; text-align:left; width:100%; }
+}
+.headline .accent{ color:var(--cyan); font-weight:400; }
 
-  /* Office HQ — rotating 3D wireframe + stats, full facility panel at the bottom */
-  .office-panel{ display:flex; align-items:stretch; gap:0; padding:0; overflow:hidden; }
-  .office-stats{ flex:1; min-width:220px; padding:26px 28px; display:flex; flex-direction:column; justify-content:center; gap:13px; }
-  .office-top{ display:flex; align-items:center; gap:14px; margin-bottom:6px; }
-  .office-title{ font-size:16px; font-weight:400; color:var(--text); letter-spacing:0.3px; }
-  .office-sub{ font-size:8.5px; letter-spacing:1.5px; color:var(--grey); margin-top:3px; }
-  .office-panel .stat-row{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; border-top:1px solid var(--line); padding-top:10px; }
-  .office-panel .stat-k{ font-size:9px; letter-spacing:1.5px; color:var(--grey); text-transform:uppercase; font-family:'SF Mono','Roboto Mono',monospace; }
-  .office-panel .stat-v{ font-size:12px; color:var(--text); text-align:right; }
-  .office-panel .stat-v.mono{ font-family:'SF Mono','Roboto Mono',monospace; color:var(--cyan); font-size:13px; letter-spacing:0.5px; }
-  .dot-on{ width:6px; height:6px; border-radius:50%; background:var(--cyan); display:inline-block; margin-right:6px; box-shadow:0 0 6px var(--cyan); animation:pulse 2.4s ease-in-out infinite; }
-  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
-  .wc-group{ display:flex; gap:16px; }
-  .wc-item{ display:flex; flex-direction:column; align-items:flex-end; gap:3px; }
-  .wc-city{ font-size:7.5px; letter-spacing:1.5px; color:var(--grey); }
-  .wc-time{ font-size:12px; color:var(--cyan); letter-spacing:0.3px; }
+/* Office HQ — rotating 3D wireframe + stats, full facility panel at the bottom */
+.office-panel{ display:flex; align-items:stretch; gap:0; padding:0; overflow:hidden; }
+.office-stats{ flex:1; min-width:220px; padding:26px 28px; display:flex; flex-direction:column; justify-content:center; gap:13px; }
+.office-top{ display:flex; align-items:center; gap:14px; margin-bottom:6px; }
+.office-title{ font-size:16px; font-weight:400; color:var(--text); letter-spacing:0.3px; }
+.office-sub{ font-size:8.5px; letter-spacing:1.5px; color:var(--grey); margin-top:3px; }
+.office-panel .stat-row{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; border-top:1px solid var(--line); padding-top:10px; }
+.office-panel .stat-k{ font-size:9px; letter-spacing:1.5px; color:var(--grey); text-transform:uppercase; font-family:'SF Mono','Roboto Mono',monospace; }
+.office-panel .stat-v{ font-size:12px; color:var(--text); text-align:right; }
+.office-panel .stat-v.mono{ font-family:'SF Mono','Roboto Mono',monospace; color:var(--cyan); font-size:13px; letter-spacing:0.5px; }
+.dot-on{ width:6px; height:6px; border-radius:50%; background:var(--cyan); display:inline-block; margin-right:6px; box-shadow:0 0 6px var(--cyan); animation:pulse 2.4s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+.wc-group{ display:flex; gap:16px; }
+.wc-item{ display:flex; flex-direction:column; align-items:flex-end; gap:3px; }
+.wc-city{ font-size:7.5px; letter-spacing:1.5px; color:var(--grey); }
+.wc-time{ font-size:12px; color:var(--cyan); letter-spacing:0.3px; }
 
-  /* Bid Velocity — days-to-award timeline */
-  .velocity-wrap{ position:relative; height:120px; margin:26px 6px 4px; }
-  .velocity-axis{ position:absolute; left:0; right:0; top:50%; height:1px; background:var(--line-strong); }
-  .velocity-tick{ position:absolute; top:calc(50% - 5px); width:1px; height:10px; background:var(--line); }
-  .velocity-tick-lbl{ position:absolute; top:calc(50% + 10px); font-size:8.5px; color:var(--grey); font-family:'SF Mono','Roboto Mono',monospace; transform:translateX(-50%); }
-  .velocity-item{ position:absolute; top:0; bottom:0; display:flex; flex-direction:column; align-items:center; justify-content:center; transform:translateX(-50%); }
-  .velocity-item .vjob{ font-size:9.5px; color:var(--text); white-space:nowrap; margin-bottom:9px; letter-spacing:0.2px; }
-  .velocity-item .vdiamond{ width:11px; height:11px; border:1px solid var(--cyan); background:var(--cyan); transform:rotate(45deg); box-shadow:0 0 7px rgba(143,227,239,0.6); flex-shrink:0; }
-  .velocity-item.urgent .vdiamond{ border-color:var(--alert); background:var(--alert); box-shadow:0 0 7px rgba(255,90,68,0.65); }
-  .velocity-item .vdays{ font-size:10px; color:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; margin-top:9px; }
-  .velocity-item.urgent .vdays{ color:var(--alert); }
-  .velocity-tbd{ margin:10px 6px 0; font-size:9.5px; color:var(--grey); }
-  .velocity-tbd b{ color:var(--text); font-weight:400; }
-  .office-box-lg{ width:252px; height:252px; flex-shrink:0; overflow:hidden; border-left:1px solid var(--line); }
-  .office-box-lg iframe{ width:100%; height:100%; border:0; display:block; pointer-events:none; background:#05070a; }
-  @media (max-width:680px){
-    .office-panel{ flex-direction:column; }
-    .office-box-lg{ width:100%; height:234px; border-left:none; border-top:1px solid var(--line); }
-    .office-stats{ padding:22px 24px; }
-  }
+/* Bid Velocity — days-to-award timeline */
+.velocity-wrap{ position:relative; height:120px; margin:26px 6px 4px; }
+.velocity-axis{ position:absolute; left:0; right:0; top:50%; height:1px; background:var(--line-strong); }
+.velocity-tick{ position:absolute; top:calc(50% - 5px); width:1px; height:10px; background:var(--line); }
+.velocity-tick-lbl{ position:absolute; top:calc(50% + 10px); font-size:8.5px; color:var(--grey); font-family:'SF Mono','Roboto Mono',monospace; transform:translateX(-50%); }
+.velocity-item{ position:absolute; top:0; bottom:0; display:flex; flex-direction:column; align-items:center; justify-content:center; transform:translateX(-50%); }
+.velocity-item .vjob{ font-size:9.5px; color:var(--text); white-space:nowrap; margin-bottom:9px; letter-spacing:0.2px; }
+.velocity-item .vdiamond{ width:11px; height:11px; border:1px solid var(--cyan); background:var(--cyan); transform:rotate(45deg); box-shadow:0 0 7px rgba(143,227,239,0.6); flex-shrink:0; }
+.velocity-item.urgent .vdiamond{ border-color:var(--alert); background:var(--alert); box-shadow:0 0 7px rgba(255,90,68,0.65); }
+.velocity-item .vdays{ font-size:10px; color:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; margin-top:9px; }
+.velocity-item.urgent .vdays{ color:var(--alert); }
+.velocity-tbd{ margin:10px 6px 0; font-size:9.5px; color:var(--grey); }
+.velocity-tbd b{ color:var(--text); font-weight:400; }
+.office-box-lg{ width:252px; height:252px; flex-shrink:0; overflow:hidden; border-left:1px solid var(--line); }
+.office-box-lg iframe{ width:100%; height:100%; border:0; display:block; pointer-events:none; background:#05070a; }
+@media (max-width:680px){
+.office-panel{ flex-direction:column; }
+.office-box-lg{ width:100%; height:234px; border-left:none; border-top:1px solid var(--line); }
+.office-stats{ padding:22px 24px; }
+}
 
-  .section{ margin-top:44px; }
-  .section-head{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:9px; margin-bottom:2px; }
-  .section-title{ font-size:11px; letter-spacing:3px; color:var(--text); }
-  .section-title::before{ content:"— "; color:var(--cyan); }
-  .section-count{ font-size:10px; letter-spacing:1.5px; color:var(--cyan-dim); }
+.section{ margin-top:44px; }
+.section-head{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:9px; margin-bottom:2px; }
+.section-title{ font-size:11px; letter-spacing:3px; color:var(--text); }
+.section-title::before{ content:"— "; color:var(--cyan); }
+.section-count{ font-size:10px; letter-spacing:1.5px; color:var(--cyan-dim); }
 
-  .cal-grid{ display:grid; grid-template-columns:1fr 1fr; column-gap:28px; }
-  .cal-col-right{ border-left:1px solid var(--line); padding-left:28px; }
-  @media (max-width:680px){
-    .cal-grid{ grid-template-columns:1fr; }
-    .cal-col-right{ border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:24px; margin-top:24px; }
-  }
+.cal-grid{ display:grid; grid-template-columns:1fr 1fr; column-gap:28px; }
+.cal-col-right{ border-left:1px solid var(--line); padding-left:28px; }
+@media (max-width:680px){
+.cal-grid{ grid-template-columns:1fr; }
+.cal-col-right{ border-left:none; padding-left:0; border-top:1px solid var(--line); padding-top:24px; margin-top:24px; }
+}
 
-  .timeline{ display:flex; flex-direction:column; }
-  .tl-row{ display:grid; grid-template-columns:52px 22px 1fr; }
-  .tl-time{ font-size:10.5px; letter-spacing:0.5px; color:var(--cyan); text-align:right; padding-top:16px; }
-  .tl-spine{ position:relative; }
-  .tl-spine::before{ content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--line); margin-left:-0.5px; }
-  .tl-node{ position:absolute; left:50%; top:17px; width:7px; height:7px; margin-left:-4px;
-    border:1px solid var(--cyan); transform:rotate(45deg); background:var(--bg); }
-  .tl-row.collision .tl-node{ border-color:var(--alert); background:var(--alert); }
-  .tl-body{ padding:11px 0 15px 16px; border-bottom:1px solid var(--line); }
-  .tl-row:last-child .tl-body{ border-bottom:none; }
-  .tl-title{ font-size:13.5px; font-weight:400; color:var(--text); }
-  .tl-note{ font-size:10.5px; color:var(--grey); margin-top:3px; font-family:'SF Mono','Roboto Mono',monospace; }
-  .flag{ display:inline-block; font-size:9px; letter-spacing:1px; margin-top:7px; margin-right:8px; padding:2px 7px; border:1px solid; font-family:'SF Mono','Roboto Mono',monospace; }
-  .flag.alert{ color:var(--alert); border-color:rgba(255,90,68,0.5); }
-  .flag.pending{ color:var(--cyan); border-color:rgba(143,227,239,0.35); }
+.timeline{ display:flex; flex-direction:column; }
+.tl-row{ display:grid; grid-template-columns:52px 22px 1fr; }
+.tl-time{ font-size:10.5px; letter-spacing:0.5px; color:var(--cyan); text-align:right; padding-top:16px; }
+.tl-spine{ position:relative; }
+.tl-spine::before{ content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--line); margin-left:-0.5px; }
+.tl-node{ position:absolute; left:50%; top:17px; width:7px; height:7px; margin-left:-4px;
+border:1px solid var(--cyan); transform:rotate(45deg); background:var(--bg); }
+.tl-row.collision .tl-node{ border-color:var(--alert); background:var(--alert); }
+.tl-body{ padding:11px 0 15px 16px; border-bottom:1px solid var(--line); }
+.tl-row:last-child .tl-body{ border-bottom:none; }
+.tl-title{ font-size:13.5px; font-weight:400; color:var(--text); }
+.tl-note{ font-size:10.5px; color:var(--grey); margin-top:3px; font-family:'SF Mono','Roboto Mono',monospace; }
+.flag{ display:inline-block; font-size:9px; letter-spacing:1px; margin-top:7px; margin-right:8px; padding:2px 7px; border:1px solid; font-family:'SF Mono','Roboto Mono',monospace; }
+.flag.alert{ color:var(--alert); border-color:rgba(255,90,68,0.5); }
+.flag.pending{ color:var(--cyan); border-color:rgba(143,227,239,0.35); }
 
-  .cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); gap:14px; margin-top:4px; }
-  .card{ padding:20px 20px 18px; display:flex; flex-direction:column; gap:9px; text-decoration:none; color:inherit; }
-  .card-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
-  .card-job{ font-size:14px; font-weight:400; letter-spacing:0.3px; text-transform:uppercase; line-height:1.3; }
-  .card-dir{ font-size:9.5px; color:var(--grey); letter-spacing:1px; text-transform:uppercase; margin-top:5px; }
-  .ring{ position:relative; width:56px; height:56px; border-radius:50%; flex-shrink:0;
-    background:conic-gradient(var(--ring-color,var(--cyan)) var(--pct,0%), var(--line) 0); }
-  .ring::before{ content:""; position:absolute; inset:4px; border-radius:50%; background:var(--bg); }
-  .ring-inner{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  .ring-inner .num{ font-size:18px; font-weight:400; color:var(--ring-color,var(--cyan)); font-family:'SF Mono','Roboto Mono',monospace; line-height:1; }
-  .ring-inner .lbl{ font-size:6.5px; color:var(--grey); letter-spacing:0.5px; text-transform:uppercase; margin-top:2px; }
-  .ring-inner .tbd{ font-size:11px; color:var(--grey); font-family:'SF Mono','Roboto Mono',monospace; }
-  .check{ font-size:20px; color:var(--cyan); }
-  .card-row{ font-size:11px; display:flex; gap:6px; }
-  .card-row .k{ color:var(--grey); min-width:96px; flex-shrink:0; text-transform:uppercase; font-size:9px; letter-spacing:0.5px; padding-top:2px; font-family:'SF Mono','Roboto Mono',monospace; }
-  .card-row .v{ flex:1; }
-  .stale-note{ font-size:10px; color:var(--alert); }
-  .beaten{ font-size:10px; color:var(--grey); }
-  .beaten b{ color:var(--text); font-weight:400; }
-  .card-link-hint{ font-size:8.5px; color:var(--grey); letter-spacing:1.5px; text-transform:uppercase; margin-top:auto; padding-top:9px; border-top:1px solid var(--line); font-family:'SF Mono','Roboto Mono',monospace; }
-  .card-link-hint span{ color:var(--cyan); }
+.cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); gap:14px; margin-top:4px; }
+.card{ padding:20px 20px 18px; display:flex; flex-direction:column; gap:9px; text-decoration:none; color:inherit; }
+.card-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.card-job{ font-size:14px; font-weight:400; letter-spacing:0.3px; text-transform:uppercase; line-height:1.3; }
+.card-dir{ font-size:9.5px; color:var(--grey); letter-spacing:1px; text-transform:uppercase; margin-top:5px; }
+.ring{ position:relative; width:56px; height:56px; border-radius:50%; flex-shrink:0;
+background:conic-gradient(var(--ring-color,var(--cyan)) var(--pct,0%), var(--line) 0); }
+.ring::before{ content:""; position:absolute; inset:4px; border-radius:50%; background:var(--bg); }
+.ring-inner{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.ring-inner .num{ font-size:18px; font-weight:400; color:var(--ring-color,var(--cyan)); font-family:'SF Mono','Roboto Mono',monospace; line-height:1; }
+.ring-inner .lbl{ font-size:6.5px; color:var(--grey); letter-spacing:0.5px; text-transform:uppercase; margin-top:2px; }
+.ring-inner .tbd{ font-size:11px; color:var(--grey); font-family:'SF Mono','Roboto Mono',monospace; }
+.check{ font-size:20px; color:var(--cyan); }
+.card-row{ font-size:11px; display:flex; gap:6px; }
+.card-row .k{ color:var(--grey); min-width:96px; flex-shrink:0; text-transform:uppercase; font-size:9px; letter-spacing:0.5px; padding-top:2px; font-family:'SF Mono','Roboto Mono',monospace; }
+.card-row .v{ flex:1; }
+.stale-note{ font-size:10px; color:var(--alert); }
+.beaten{ font-size:10px; color:var(--grey); }
+.beaten b{ color:var(--text); font-weight:400; }
+.card-link-hint{ font-size:8.5px; color:var(--grey); letter-spacing:1.5px; text-transform:uppercase; margin-top:auto; padding-top:9px; border-top:1px solid var(--line); font-family:'SF Mono','Roboto Mono',monospace; }
+.card-link-hint span{ color:var(--cyan); }
 
-  /* Pipeline Balance + Bidding By EP */
-  .pipeline-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
-  @media (max-width:680px){ .pipeline-grid{ grid-template-columns:1fr; } }
-  .pl-box{ padding:24px 26px 22px; display:flex; flex-direction:column; }
-  .pl-label{ font-size:10px; letter-spacing:2px; color:var(--grey); margin-bottom:16px; }
+/* Pipeline Balance + Bidding By EP */
+.pipeline-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+@media (max-width:680px){ .pipeline-grid{ grid-template-columns:1fr; } }
+.pl-box{ padding:24px 26px 22px; display:flex; flex-direction:column; }
+.pl-label{ font-size:10px; letter-spacing:2px; color:var(--grey); margin-bottom:16px; }
 
-  .balance-total{ font-size:36px; font-weight:400; color:var(--text); line-height:1; font-family:'SF Mono','Roboto Mono',monospace; }
-  .balance-total-lbl{ font-size:8.5px; letter-spacing:2px; color:var(--grey); margin-top:6px; margin-bottom:6px; }
-  .balance-legend{ display:flex; gap:22px; margin-top:10px; font-size:10.5px; color:var(--text); flex-wrap:wrap; }
-  .balance-legend .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; margin-right:7px; }
-  .dot.cyan{ background:var(--cyan); box-shadow:0 0 5px var(--cyan); }
-  .dot.amber{ background:var(--amber); box-shadow:0 0 5px var(--amber); }
-  .dot.grey{ background:var(--grey); box-shadow:0 0 5px var(--grey); }
+.balance-total{ font-size:36px; font-weight:400; color:var(--text); line-height:1; font-family:'SF Mono','Roboto Mono',monospace; }
+.balance-total-lbl{ font-size:8.5px; letter-spacing:2px; color:var(--grey); margin-top:6px; margin-bottom:6px; }
+.balance-legend{ display:flex; gap:22px; margin-top:10px; font-size:10.5px; color:var(--text); flex-wrap:wrap; }
+.balance-legend .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; margin-right:7px; }
+.dot.cyan{ background:var(--cyan); box-shadow:0 0 5px var(--cyan); }
+.dot.amber{ background:var(--amber); box-shadow:0 0 5px var(--amber); }
+.dot.grey{ background:var(--grey); box-shadow:0 0 5px var(--grey); }
 
-  .vector-chart{ margin:2px auto 0; display:block; overflow:visible; }
-  .vector-grid{ fill:none; stroke:var(--line); stroke-width:1; }
-  .vector-axis{ stroke:var(--line-strong); stroke-width:1; }
-  .vector-fill{ fill:rgba(143,227,239,0.14); stroke:var(--cyan); stroke-width:1.5; filter:drop-shadow(0 0 4px rgba(143,227,239,0.5)); }
-  .vector-dot{ fill:var(--bg); stroke:var(--cyan); stroke-width:1.5; }
-  .vector-label{ font-size:8.5px; letter-spacing:1.5px; fill:var(--grey); font-family:'Helvetica Neue',Arial,sans-serif; text-transform:uppercase; }
-  .vector-value{ font-size:11px; fill:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; }
+.vector-chart{ margin:2px auto 0; display:block; overflow:visible; }
+.vector-grid{ fill:none; stroke:var(--line); stroke-width:1; }
+.vector-axis{ stroke:var(--line-strong); stroke-width:1; }
+.vector-fill{ fill:rgba(143,227,239,0.14); stroke:var(--cyan); stroke-width:1.5; filter:drop-shadow(0 0 4px rgba(143,227,239,0.5)); }
+.vector-dot{ fill:var(--bg); stroke:var(--cyan); stroke-width:1.5; }
+.vector-label{ font-size:8.5px; letter-spacing:1.5px; fill:var(--grey); font-family:'Helvetica Neue',Arial,sans-serif; text-transform:uppercase; }
+.vector-value{ font-size:11px; fill:var(--cyan); font-family:'SF Mono','Roboto Mono',monospace; }
 
-  .ep-load{ display:flex; flex-direction:column; gap:18px; justify-content:center; flex:1; }
-  .ep-row{ display:grid; grid-template-columns:56px 1fr 22px; align-items:center; gap:14px; }
-  .ep-name{ font-size:10.5px; letter-spacing:1.5px; color:var(--text); }
-  .ep-meter{ display:flex; gap:3px; }
-  .ep-seg{ flex:1; height:14px; background:var(--line); }
-  .ep-seg.filled{ background:var(--cyan); box-shadow:0 0 6px rgba(143,227,239,0.55); }
-  .ep-count{ font-family:'SF Mono','Roboto Mono',monospace; color:var(--cyan); font-size:14px; text-align:right; }
+.ep-load{ display:flex; flex-direction:column; gap:18px; justify-content:center; flex:1; }
+.ep-row{ display:grid; grid-template-columns:56px 1fr 22px; align-items:center; gap:14px; }
+.ep-name{ font-size:10.5px; letter-spacing:1.5px; color:var(--text); }
+.ep-meter{ display:flex; gap:3px; }
+.ep-seg{ flex:1; height:14px; background:var(--line); }
+.ep-seg.filled{ background:var(--cyan); box-shadow:0 0 6px rgba(143,227,239,0.55); }
+.ep-count{ font-family:'SF Mono','Roboto Mono',monospace; color:var(--cyan); font-size:14px; text-align:right; }
 
-  footer{ margin-top:56px; padding-top:15px; border-top:1px solid var(--line); font-size:9.5px; color:var(--grey); line-height:1.8; letter-spacing:0.3px; }
-  footer a{ color:var(--cyan); text-decoration:none; }
+footer{ margin-top:56px; padding-top:15px; border-top:1px solid var(--line); font-size:9.5px; color:var(--grey); line-height:1.8; letter-spacing:0.3px; }
+footer a{ color:var(--cyan); text-decoration:none; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="topbar">
-    <div class="brand caps"><b>JOJX</b> — Dashboard <span class="brand-date mono">· Aug 9</span></div>
-    <div class="topright">
-      <div class="stamp mono"><span class="livedot"></span>Snapshot · Aug 9, 12:13p PT</div>
-    </div>
-  </div>
+<div class="topbar">
+<div class="brand caps"><b>JOJX</b> — Dashboard <span class="brand-date mono">· Aug 9</span></div>
+<div class="topright">
+<div class="stamp mono"><span class="livedot"></span>Snapshot · Aug 9, 1:04p PT</div>
+</div>
+</div>
 
-  <div class="hero module">
-    <div class="hero-main">
-      <div class="date-tag caps">Sunday, August 9, 2026</div>
-      <div class="headline">Quiet Sunday — but tomorrow has a <span class="accent">collision</span> on the calendar between JOJX x Jared Clayton Rep Regroup and PRECALL: Paul Butterworth x Panera, both on the books at 1:30p. Next up: <span class="accent">Power Crunch — Ferraro</span> awards in 3 days.</div>
-    </div>
-    <div class="hero-next">
-      <div class="hero-next-lbl caps">First Event · Tmrw</div>
-      <div class="hero-next-time mono">9:00A</div>
-      <div class="hero-next-job">DOUG STEPHEN x JOJX INTRO</div>
-    </div>
-  </div>
+<div class="hero module">
+<div class="hero-main">
+<div class="date-tag caps">Sunday, August 9, 2026</div>
+<div class="headline">Quiet Sunday — but tomorrow has a <span class="accent">collision</span> on the calendar between JOJX x Jared Clayton Rep Regroup and PRECALL: Paul Butterworth x Panera, both on the books at 1:30p. Next up: <span class="accent">Power Crunch — Ferraro</span> awards in 3 days.</div>
+</div>
+<div class="hero-next">
+<div class="hero-next-lbl caps">First Event · Tmrw</div>
+<div class="hero-next-time mono">9:00A</div>
+<div class="hero-next-job">DOUG STEPHEN x JOJX INTRO</div>
+</div>
+</div>
 
-  <div class="section cal-grid">
-    <div class="cal-col">
-      <div class="section-head"><div class="section-title caps">Today</div><div class="section-count mono">00 EVENTS</div></div>
-      <div class="timeline">
-        <div style="padding:16px 0; color:var(--grey); font-size:11px; font-family:'SF Mono','Roboto Mono',monospace;">Nothing on the books.</div>
-      </div>
-    </div>
-    <div class="cal-col cal-col-right">
-      <div class="section-head"><div class="section-title caps">On Deck — Monday, Aug 10</div><div class="section-count mono">09 EVENTS</div></div>
-      <div class="timeline">
-        <div class="tl-row">
-          <div class="tl-time mono">9:00A</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">DOUG STEPHEN x JOJX INTRO</div>
-            <div class="tl-note">9:00 – 10:00a</div>
-            <span class="flag pending caps">○ Ianni pending</span>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">10:00A</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">JOJX LINE 1: JOJX Team internal</div>
-            <div class="tl-note">10:00 – 10:30a</div>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">11:00A</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">USAA Treatment In-House Review</div>
-            <div class="tl-note">11:00 – 12:00p</div>
-            <span class="flag pending caps">○ McCourt pending</span>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">12:00P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Martin Readymag Walkthrough</div>
-            <div class="tl-note">12:00 – 1:00p</div>
-            <span class="flag pending caps">○ Martin pending</span>
-          </div>
-        </div>
-        <div class="tl-row collision">
-          <div class="tl-time mono">1:00P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">JOJX x Jared Clayton Rep Regroup</div>
-            <div class="tl-note">1:00 – 2:00p</div>
-            <span class="flag alert caps">▲ Collision — PRECALL: Paul Butterworth x Panera</span>
-            <span class="flag pending caps">○ Bim, Hellored pending</span>
-          </div>
-        </div>
-        <div class="tl-row collision">
-          <div class="tl-time mono">1:30P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">PRECALL: Paul Butterworth x Panera | 1st Call</div>
-            <div class="tl-note">1:30 – 2:00p</div>
-            <span class="flag alert caps">▲ Collision — JOJX x Jared Clayton Rep Regroup</span>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">2:00P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">Paul Butterworth x Panera | 1st Call</div>
-            <div class="tl-note">2:00 – 3:00p</div>
-            <span class="flag pending caps">○ Alisha, Charlotte, Paul, Tara pending</span>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">3:00P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">DEBRIEF: Paul Butterworth x Panera | 1st Call</div>
-            <div class="tl-note">3:00 – 3:30p</div>
-          </div>
-        </div>
-        <div class="tl-row">
-          <div class="tl-time mono">4:00P</div>
-          <div class="tl-spine"><div class="tl-node"></div></div>
-          <div class="tl-body">
-            <div class="tl-title">JOJX LINE 1: End of Day</div>
-            <div class="tl-note">4:00 – 4:30p</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="section cal-grid">
+<div class="cal-col">
+<div class="section-head"><div class="section-title caps">Today</div><div class="section-count mono">00 EVENTS</div></div>
+<div class="timeline">
+<div style="padding:16px 0; color:var(--grey); font-size:11px; font-family:'SF Mono','Roboto Mono',monospace;">Nothing on the books.</div>
+</div>
+</div>
+<div class="cal-col cal-col-right">
+<div class="section-head"><div class="section-title caps">On Deck — Monday, Aug 10</div><div class="section-count mono">09 EVENTS</div></div>
+<div class="timeline">
+<div class="tl-row">
+<div class="tl-time mono">9:00A</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">DOUG STEPHEN x JOJX INTRO</div>
+<div class="tl-note">9:00 – 10:00a</div>
+<span class="flag pending caps">○ Ianni pending</span>
+</div>
+</div>
+<div class="tl-row">
+<div class="tl-time mono">10:00A</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">JOJX LINE 1: JOJX Team internal</div>
+<div class="tl-note">10:00 – 10:30a</div>
+</div>
+</div>
+<div class="tl-row">
+<div class="tl-time mono">11:00A</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">USAA Treatment In-House Review</div>
+<div class="tl-note">11:00 – 12:00p</div>
+<span class="flag pending caps">○ McCourt pending</span>
+</div>
+</div>
+<div class="tl-row">
+<div class="tl-time mono">12:00P</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">Martin Readymag Walkthrough</div>
+<div class="tl-note">12:00 – 1:00p</div>
+<span class="flag pending caps">○ Martin pending</span>
+</div>
+</div>
+<div class="tl-row collision">
+<div class="tl-time mono">1:00P</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">JOJX x Jared Clayton Rep Regroup</div>
+<div class="tl-note">1:00 – 2:00p</div>
+<span class="flag alert caps">▲ Collision — PRECALL: Paul Butterworth x Panera</span>
+<span class="flag pending caps">○ Bim, Hellored pending</span>
+</div>
+</div>
+<div class="tl-row collision">
+<div class="tl-time mono">1:30P</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">PRECALL: Paul Butterworth x Panera | 1st Call</div>
+<div class="tl-note">1:30 – 2:00p</div>
+<span class="flag alert caps">▲ Collision — JOJX x Jared Clayton Rep Regroup</span>
+</div>
+</div>
+<div class="tl-row">
+<div class="tl-time mono">2:00P</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">Paul Butterworth x Panera | 1st Call</div>
+<div class="tl-note">2:00 – 3:00p</div>
+<span class="flag pending caps">○ Alisha, Charlotte, Paul, Tara pending</span>
+</div>
+</div>
+<div class="tl-row">
+<div class="tl-time mono">3:00P</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">DEBRIEF: Paul Butterworth x Panera | 1st Call</div>
+<div class="tl-note">3:00 – 3:30p</div>
+</div>
+</div>
+<div class="tl-row">
+<div class="tl-time mono">4:00P</div>
+<div class="tl-spine"><div class="tl-node"></div></div>
+<div class="tl-body">
+<div class="tl-title">JOJX LINE 1: End of Day</div>
+<div class="tl-note">4:00 – 4:30p</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-  <div class="section">
-    <div class="section-head"><div class="section-title caps">Active Bids</div><div class="section-count mono">05 IN PLAY</div></div>
-    <div class="cards">
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">Power Crunch — Ferraro</div>
-            <div class="card-dir">Dir. Ace &nbsp;·&nbsp; EP Joe</div>
-          </div>
-          <div class="ring" style="--pct:70%;"><div class="ring-inner"><div class="num">3</div><div class="lbl">Days</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">Anomaly</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Rebecca Adams</div></div>
-        <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">August 4</div></div>
-        <div class="card-row"><div class="k">Award</div><div class="v">August 12</div></div>
-        <div class="beaten">Also bidding: <b>Kay Kienzler @ Spark &amp; Riot</b></div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
+<div class="section">
+<div class="section-head"><div class="section-title caps">Active Bids</div><div class="section-count mono">05 IN PLAY</div></div>
+<div class="cards">
+<a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+<div class="card-top">
+<div>
+<div class="card-job">Power Crunch — Ferraro</div>
+<div class="card-dir">Dir. Ace &nbsp;·&nbsp; EP Joe</div>
+</div>
+<div class="ring" style="--pct:70%;"><div class="ring-inner"><div class="num">3</div><div class="lbl">Days</div></div></div>
+</div>
+<div class="card-row"><div class="k">Agency</div><div class="v">Anomaly</div></div>
+<div class="card-row"><div class="k">Agency Prod</div><div class="v">Rebecca Adams</div></div>
+<div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">August 4</div></div>
+<div class="card-row"><div class="k">Award</div><div class="v">August 12</div></div>
+<div class="beaten">Also bidding: <b>Kay Kienzler @ Spark &amp; Riot</b></div>
+<div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+</a>
 
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">USAA</div>
-            <div class="card-dir">Dir. McCourt &nbsp;·&nbsp; EP Joe</div>
-          </div>
-          <div class="ring" style="--pct:60%;"><div class="ring-inner"><div class="num">4</div><div class="lbl">Days</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">Razorfish</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Allie Hettler</div></div>
-        <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">August 11 (aim EOD 8/10)</div></div>
-        <div class="card-row"><div class="k">Award</div><div class="v">August 13</div></div>
-        <div class="beaten">Also bidding: <b>TBD</b></div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
+<a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+<div class="card-top">
+<div>
+<div class="card-job">USAA</div>
+<div class="card-dir">Dir. McCourt &nbsp;·&nbsp; EP Joe</div>
+</div>
+<div class="ring" style="--pct:60%;"><div class="ring-inner"><div class="num">4</div><div class="lbl">Days</div></div></div>
+</div>
+<div class="card-row"><div class="k">Agency</div><div class="v">Razorfish</div></div>
+<div class="card-row"><div class="k">Agency Prod</div><div class="v">Allie Hettler</div></div>
+<div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">August 11 (aim EOD 8/10)</div></div>
+<div class="card-row"><div class="k">Award</div><div class="v">August 13</div></div>
+<div class="beaten">Also bidding: <b>TBD</b></div>
+<div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+</a>
 
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">Panera</div>
-            <div class="card-dir">Dir. Paul &nbsp;·&nbsp; EP —</div>
-          </div>
-          <div class="ring" style="--pct:0%; --ring-color:var(--grey);"><div class="ring-inner"><div class="tbd">TBD</div><div class="lbl">Award</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">72</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Charlotte</div></div>
-        <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">Not recorded</div></div>
-        <div class="card-row"><div class="k">Award</div><div class="v">Not recorded</div></div>
-        <div class="beaten">Also bidding: <b>TBD</b></div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
+<a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+<div class="card-top">
+<div>
+<div class="card-job">Panera</div>
+<div class="card-dir">Dir. Paul &nbsp;·&nbsp; EP —</div>
+</div>
+<div class="ring" style="--pct:0%; --ring-color:var(--grey);"><div class="ring-inner"><div class="tbd">TBD</div><div class="lbl">Award</div></div></div>
+</div>
+<div class="card-row"><div class="k">Agency</div><div class="v">72</div></div>
+<div class="card-row"><div class="k">Agency Prod</div><div class="v">Charlotte</div></div>
+<div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">Not recorded</div></div>
+<div class="card-row"><div class="k">Award</div><div class="v">Not recorded</div></div>
+<div class="beaten">Also bidding: <b>TBD</b></div>
+<div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+</a>
 
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">USPS</div>
-            <div class="card-dir">Dir. Ace &nbsp;·&nbsp; EP Harry</div>
-          </div>
-          <div class="ring" style="--pct:0%; --ring-color:var(--grey);"><div class="ring-inner"><div class="tbd">TBD</div><div class="lbl">Award</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">McCann</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Sam Milgrim</div></div>
-        <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">August 13</div></div>
-        <div class="card-row"><div class="k">Award</div><div class="v">Not recorded</div></div>
-        <div class="beaten">Also bidding: <b>Dave Meyers @ Radical</b></div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
+<a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+<div class="card-top">
+<div>
+<div class="card-job">USPS</div>
+<div class="card-dir">Dir. Ace &nbsp;·&nbsp; EP Harry</div>
+</div>
+<div class="ring" style="--pct:0%; --ring-color:var(--grey);"><div class="ring-inner"><div class="tbd">TBD</div><div class="lbl">Award</div></div></div>
+</div>
+<div class="card-row"><div class="k">Agency</div><div class="v">McCann</div></div>
+<div class="card-row"><div class="k">Agency Prod</div><div class="v">Sam Milgrim</div></div>
+<div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">August 13</div></div>
+<div class="card-row"><div class="k">Award</div><div class="v">Not recorded</div></div>
+<div class="beaten">Also bidding: <b>Dave Meyers @ Radical</b></div>
+<div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+</a>
 
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">Farmers Dog — Jalen</div>
-            <div class="card-dir">Dir. Scott &nbsp;·&nbsp; EP Harry</div>
-          </div>
-          <div class="ring" style="--pct:0%; --ring-color:var(--grey);"><div class="ring-inner"><div class="tbd">TBD</div><div class="lbl">Award</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">Direct</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Jordan Makow</div></div>
-        <div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">June 19</div></div>
-        <div class="card-row"><div class="k">Award</div><div class="v">Not recorded</div></div>
-        <div class="beaten">Also bidding: <b>Single bid</b></div>
-        <div class="stale-note">Due date is 7+ weeks past with no award logged — looks stale, not overdue. Worth a status check.</div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
-    </div>
-  </div>
+<a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+<div class="card-top">
+<div>
+<div class="card-job">Farmers Dog — Jalen</div>
+<div class="card-dir">Dir. Scott &nbsp;·&nbsp; EP Harry</div>
+</div>
+<div class="ring" style="--pct:0%; --ring-color:var(--grey);"><div class="ring-inner"><div class="tbd">TBD</div><div class="lbl">Award</div></div></div>
+</div>
+<div class="card-row"><div class="k">Agency</div><div class="v">Direct</div></div>
+<div class="card-row"><div class="k">Agency Prod</div><div class="v">Jordan Makow</div></div>
+<div class="card-row"><div class="k">Bid/Treat Due</div><div class="v">June 19</div></div>
+<div class="card-row"><div class="k">Award</div><div class="v">Not recorded</div></div>
+<div class="beaten">Also bidding: <b>Single bid</b></div>
+<div class="stale-note">Due date is 7+ weeks past with no award logged — looks stale, not overdue. Worth a status check.</div>
+<div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+</a>
+</div>
+</div>
 
-  <div class="section">
-    <div class="section-head"><div class="section-title caps">Awarded</div><div class="section-count mono">03 LANDED</div></div>
-    <div class="cards">
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">Grainger</div>
-            <div class="card-dir">Dir. Mike &nbsp;·&nbsp; EP Joe</div>
-          </div>
-          <div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">Dentsu</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Tony Wallace</div></div>
-        <div class="card-row"><div class="k">Awarded</div><div class="v">July 10</div></div>
-        <div class="card-row"><div class="k">Shoot</div><div class="v">Aug 19–20</div></div>
-        <div class="beaten">Single bid — no competition to beat</div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
+<div class="section">
+<div class="section-head"><div class="section-title caps">Awarded</div><div class="section-count mono">03 LANDED</div></div>
+<div class="cards">
+<a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+<div class="card-top">
+<div>
+<div class="card-job">Grainger</div>
+<div class="card-dir">Dir. Mike &nbsp;·&nbsp; EP Joe</div>
+</div>
+<div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
+</div>
+<div class="card-row"><div class="k">Agency</div><div class="v">Dentsu</div></div>
+<div class="card-row"><div class="k">Agency Prod</div><div class="v">Tony Wallace</div></div>
+<div class="card-row"><div class="k">Awarded</div><div class="v">July 10</div></div>
+<div class="card-row"><div class="k">Shoot</div><div class="v">Aug 19–20</div></div>
+<div class="beaten">Single bid — no competition to beat</div>
+<div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+</a>
 
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">Lexus</div>
-            <div class="card-dir">Dir. Per &nbsp;·&nbsp; EP Joe</div>
-          </div>
-          <div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">Walton Isaacson</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Elsa Rubalcava</div></div>
-        <div class="card-row"><div class="k">Awarded</div><div class="v">July 21</div></div>
-        <div class="card-row"><div class="k">Shoot</div><div class="v">Aug 8–9</div></div>
-        <div class="beaten">Beat out: <b>James F Coton (Freelance), Tino (Canada)</b></div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
+<a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+<div class="card-top">
+<div>
+<div class="card-job">Lexus</div>
+<div class="card-dir">Dir. Per &nbsp;·&nbsp; EP Joe</div>
+</div>
+<div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
+</div>
+<div class="card-row"><div class="k">Agency</div><div class="v">Walton Isaacson</div></div>
+<div class="card-row"><div class="k">Agency Prod</div><div class="v">Elsa Rubalcava</div></div>
+<div class="card-row"><div class="k">Awarded</div><div class="v">July 21</div></div>
+<div class="card-row"><div class="k">Shoot</div><div class="v">Aug 8–9</div></div>
+<div class="beaten">Beat out: <b>James F Coton (Freelance), Tino (Canada)</b></div>
+<div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+</a>
 
-      <a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
-        <div class="card-top">
-          <div>
-            <div class="card-job">Farmers Dog — Molly</div>
-            <div class="card-dir">Dir. Scott &nbsp;·&nbsp; EP Harry</div>
-          </div>
-          <div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
-        </div>
-        <div class="card-row"><div class="k">Agency</div><div class="v">Direct</div></div>
-        <div class="card-row"><div class="k">Agency Prod</div><div class="v">Jordan Makow</div></div>
-        <div class="card-row"><div class="k">Awarded</div><div class="v">TBD</div></div>
-        <div class="card-row"><div class="k">Shoot</div><div class="v">Aug 19</div></div>
-        <div class="beaten">Single bid — no competition to beat</div>
-        <div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
-      </a>
-    </div>
-  </div>
+<a class="card module" href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">
+<div class="card-top">
+<div>
+<div class="card-job">Farmers Dog — Molly</div>
+<div class="card-dir">Dir. Scott &nbsp;·&nbsp; EP Harry</div>
+</div>
+<div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
+</div>
+<div class="card-row"><div class="k">Agency</div><div class="v">Direct</div></div>
+<div class="card-row"><div class="k">Agency Prod</div><div class="v">Jordan Makow</div></div>
+<div class="card-row"><div class="k">Awarded</div><div class="v">TBD</div></div>
+<div class="card-row"><div class="k">Shoot</div><div class="v">Aug 19</div></div>
+<div class="beaten">Single bid — no competition to beat</div>
+<div class="card-link-hint">Open in <span>JOJX Jobs List →</span></div>
+</a>
+</div>
+</div>
 
-  <div class="section">
-    <div class="section-head"><div class="section-title caps">Pipeline</div><div class="section-count mono">08 ACTIVE</div></div>
-    <div class="pipeline-grid">
-      <div class="pl-box module">
-        <div class="pl-label caps">Pipeline Balance</div>
-        <div class="balance-total mono">8</div>
-        <div class="balance-total-lbl caps">Active Jobs In Play</div>
-        <svg class="vector-chart" viewBox="0 0 220 155" preserveAspectRatio="xMidYMid meet" style="width:100%;max-width:260px;height:auto;">
-          <polygon class="vector-grid" points="92.8,115.4 110,140 127.2,115.4"></polygon>
-          <polygon class="vector-grid" points="75.6,90.8 110,140 144.4,90.8"></polygon>
-          <polygon class="vector-grid" points="58.4,66.3 110,140 161.6,66.3"></polygon>
-          <line class="vector-axis" x1="110" y1="140" x2="58.4" y2="66.3"></line>
-          <line class="vector-axis" x1="110" y1="140" x2="161.6" y2="66.3"></line>
-          <polygon class="vector-fill" points="110,140 66.98,78.56 135.81,103.14"></polygon>
-          <circle class="vector-dot" cx="66.98" cy="78.56" r="3"></circle>
-          <circle class="vector-dot" cx="135.81" cy="103.14" r="3"></circle>
-          <text class="vector-label" x="58" y="52" text-anchor="end">Bidding</text>
-          <text class="vector-value" x="58" y="64" text-anchor="end">5</text>
-          <text class="vector-label" x="162" y="52" text-anchor="start">Awarded</text>
-          <text class="vector-value" x="162" y="64" text-anchor="start">3</text>
-        </svg>
-        <div class="balance-legend">
-          <span><span class="dot cyan"></span>Bidding · 5</span>
-          <span><span class="dot amber"></span>Awarded · 3</span>
-        </div>
-      </div>
-      <div class="pl-box module">
-        <div class="pl-label caps">Bidding By EP</div>
-        <div class="ep-load">
-          <div class="ep-row">
-            <div class="ep-name caps">Joe</div>
-            <div class="ep-meter">
-              <span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span>
-            </div>
-            <div class="ep-count mono">2</div>
-          </div>
-          <div class="ep-row">
-            <div class="ep-name caps">Harry</div>
-            <div class="ep-meter">
-              <span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span>
-            </div>
-            <div class="ep-count mono">2</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="section">
+<div class="section-head"><div class="section-title caps">Pipeline</div><div class="section-count mono">08 ACTIVE</div></div>
+<div class="pipeline-grid">
+<div class="pl-box module">
+<div class="pl-label caps">Pipeline Balance</div>
+<div class="balance-total mono">8</div>
+<div class="balance-total-lbl caps">Active Jobs In Play</div>
+<svg class="vector-chart" viewBox="0 0 220 155" preserveAspectRatio="xMidYMid meet" style="width:100%;max-width:260px;height:auto;">
+<polygon class="vector-grid" points="92.8,115.4 110,140 127.2,115.4"></polygon>
+<polygon class="vector-grid" points="75.6,90.8 110,140 144.4,90.8"></polygon>
+<polygon class="vector-grid" points="58.4,66.3 110,140 161.6,66.3"></polygon>
+<line class="vector-axis" x1="110" y1="140" x2="58.4" y2="66.3"></line>
+<line class="vector-axis" x1="110" y1="140" x2="161.6" y2="66.3"></line>
+<polygon class="vector-fill" points="110,140 66.98,78.56 135.81,103.14"></polygon>
+<circle class="vector-dot" cx="66.98" cy="78.56" r="3"></circle>
+<circle class="vector-dot" cx="135.81" cy="103.14" r="3"></circle>
+<text class="vector-label" x="58" y="52" text-anchor="end">Bidding</text>
+<text class="vector-value" x="58" y="64" text-anchor="end">5</text>
+<text class="vector-label" x="162" y="52" text-anchor="start">Awarded</text>
+<text class="vector-value" x="162" y="64" text-anchor="start">3</text>
+</svg>
+<div class="balance-legend">
+<span><span class="dot cyan"></span>Bidding · 5</span>
+<span><span class="dot amber"></span>Awarded · 3</span>
+</div>
+</div>
+<div class="pl-box module">
+<div class="pl-label caps">Bidding By EP</div>
+<div class="ep-load">
+<div class="ep-row">
+<div class="ep-name caps">Joe</div>
+<div class="ep-meter">
+<span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span>
+</div>
+<div class="ep-count mono">2</div>
+</div>
+<div class="ep-row">
+<div class="ep-name caps">Harry</div>
+<div class="ep-meter">
+<span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span><span class="ep-seg filled"></span>
+</div>
+<div class="ep-count mono">2</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-  <div class="section">
-    <div class="section-head"><div class="section-title caps">Facility</div><div class="section-count mono">920 ABBOT KINNEY</div></div>
-    <div class="office-panel module">
-      <div class="office-stats">
-        <div class="office-top">
-          <div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
-          <div>
-            <div class="office-title">920 Abbot Kinney</div>
-            <div class="office-sub caps">Venice, CA 90291 · Office HQ</div>
-          </div>
-        </div>
-        <div class="stat-row"><div class="stat-k">Status</div><div class="stat-v"><span class="dot-on"></span>Active</div></div>
-        <div class="stat-row">
-          <div class="stat-k">World Clock</div>
-          <div class="wc-group">
-            <div class="wc-item"><span class="wc-city">LA</span><span class="wc-time mono" id="clockLA">—:—</span></div>
-            <div class="wc-item"><span class="wc-city">CHI</span><span class="wc-time mono" id="clockCHI">—:—</span></div>
-            <div class="wc-item"><span class="wc-city">NY</span><span class="wc-time mono" id="clockNY">—:—</span></div>
-          </div>
-        </div>
-        <div class="stat-row"><div class="stat-k">Zone</div><div class="stat-v">Pacific · PT</div></div>
-        <div class="stat-row"><div class="stat-k">Coordinates</div><div class="stat-v mono">33.9908°N, 118.4695°W</div></div>
-      </div>
-      <div class="office-box-lg">
-        <iframe src="https://c0jare.github.io/abbot-kinney-office-wireframe/abbot_kinney_office_wireframe.html?embed=1" loading="lazy" title="920 Abbot Kinney — Office HQ wireframe"></iframe>
-      </div>
-    </div>
-  </div>
+<div class="section">
+<div class="section-head"><div class="section-title caps">Facility</div><div class="section-count mono">920 ABBOT KINNEY</div></div>
+<div class="office-panel module">
+<div class="office-stats">
+<div class="office-top">
+<div class="ring" style="--pct:100%;"><div class="ring-inner"><div class="check">✓</div></div></div>
+<div>
+<div class="office-title">920 Abbot Kinney</div>
+<div class="office-sub caps">Venice, CA 90291 · Office HQ</div>
+</div>
+</div>
+<div class="stat-row"><div class="stat-k">Status</div><div class="stat-v"><span class="dot-on"></span>Active</div></div>
+<div class="stat-row">
+<div class="stat-k">World Clock</div>
+<div class="wc-group">
+<div class="wc-item"><span class="wc-city">LA</span><span class="wc-time mono" id="clockLA">—:—</span></div>
+<div class="wc-item"><span class="wc-city">CHI</span><span class="wc-time mono" id="clockCHI">—:—</span></div>
+<div class="wc-item"><span class="wc-city">NY</span><span class="wc-time mono" id="clockNY">—:—</span></div>
+</div>
+</div>
+<div class="stat-row"><div class="stat-k">Zone</div><div class="stat-v">Pacific · PT</div></div>
+<div class="stat-row"><div class="stat-k">Coordinates</div><div class="stat-v mono">33.9908°N, 118.4695°W</div></div>
+</div>
+<div class="office-box-lg">
+<iframe src="https://c0jare.github.io/abbot-kinney-office-wireframe/abbot_kinney_office_wireframe.html?embed=1" loading="lazy" title="920 Abbot Kinney — Office HQ wireframe"></iframe>
+</div>
+</div>
+</div>
 
-  <div class="section">
-    <div class="section-head"><div class="section-title caps">Bid Velocity</div><div class="section-count mono">DAYS TO AWARD</div></div>
-    <div class="module" style="padding:10px 24px 22px;">
-      <div class="velocity-wrap">
-        <div class="velocity-axis"></div>
-        <div class="velocity-tick" style="left:0%;"></div>
-        <div class="velocity-tick-lbl" style="left:0%;">0</div>
-        <div class="velocity-tick" style="left:25%;"></div>
-        <div class="velocity-tick-lbl" style="left:25%;">4</div>
-        <div class="velocity-tick" style="left:50%;"></div>
-        <div class="velocity-tick-lbl" style="left:50%;">8</div>
-        <div class="velocity-tick" style="left:75%;"></div>
-        <div class="velocity-tick-lbl" style="left:75%;">12</div>
-        <div class="velocity-tick" style="left:100%;"></div>
-        <div class="velocity-tick-lbl" style="left:100%;">16</div>
+<div class="section">
+<div class="section-head"><div class="section-title caps">Bid Velocity</div><div class="section-count mono">DAYS TO AWARD</div></div>
+<div class="module" style="padding:10px 24px 22px;">
+<div class="velocity-wrap">
+<div class="velocity-axis"></div>
+<div class="velocity-tick" style="left:0%;"></div>
+<div class="velocity-tick-lbl" style="left:0%;">0</div>
+<div class="velocity-tick" style="left:25%;"></div>
+<div class="velocity-tick-lbl" style="left:25%;">4</div>
+<div class="velocity-tick" style="left:50%;"></div>
+<div class="velocity-tick-lbl" style="left:50%;">8</div>
+<div class="velocity-tick" style="left:75%;"></div>
+<div class="velocity-tick-lbl" style="left:75%;">12</div>
+<div class="velocity-tick" style="left:100%;"></div>
+<div class="velocity-tick-lbl" style="left:100%;">16</div>
 
-        <div class="velocity-item" style="left:18.75%;">
-          <div class="vjob">Power Crunch — Ferraro</div>
-          <div class="vdiamond"></div>
-          <div class="vdays">3d</div>
-        </div>
-        <div class="velocity-item" style="left:25%;">
-          <div class="vjob">USAA</div>
-          <div class="vdiamond"></div>
-          <div class="vdays">4d</div>
-        </div>
-      </div>
-      <div class="velocity-tbd">Not plotted — award date TBD: <b>Panera</b>, <b>USPS</b>, <b>Farmers Dog — Jalen</b></div>
-    </div>
-  </div>
+<div class="velocity-item" style="left:18.75%;">
+<div class="vjob">Power Crunch — Ferraro</div>
+<div class="vdiamond"></div>
+<div class="vdays">3d</div>
+</div>
+<div class="velocity-item" style="left:25%;">
+<div class="vjob">USAA</div>
+<div class="vdiamond"></div>
+<div class="vdays">4d</div>
+</div>
+</div>
+<div class="velocity-tbd">Not plotted — award date TBD: <b>Panera</b>, <b>USPS</b>, <b>Farmers Dog — Jalen</b></div>
+</div>
+</div>
 
-  <footer class="caps">
-    Calendar — JOJX Office &nbsp;·&nbsp;
-    <a href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">JOJX Jobs List</a><br>
-    <span style="letter-spacing:0.3px;">Auto-refreshes every 30 minutes.</span>
-  </footer>
+<footer class="caps">
+Calendar — JOJX Office &nbsp;·&nbsp;
+<a href="https://docs.google.com/spreadsheets/d/1EKxpEWY21uHoC87c9oa-BiZi6mszlKIdATHIp83AuP4/edit" target="_blank" rel="noopener">JOJX Jobs List</a><br>
+<span style="letter-spacing:0.3px;">Auto-refreshes every 30 minutes.</span>
+</footer>
 </div>
 <script>
 (function(){
-  var zones = [
-    {id:'clockLA', tz:'America/Los_Angeles'},
-    {id:'clockCHI', tz:'America/Chicago'},
-    {id:'clockNY', tz:'America/New_York'}
-  ];
-  function tick(){
-    zones.forEach(function(z){
-      var el = document.getElementById(z.id);
-      if(!el) return;
-      el.textContent = new Intl.DateTimeFormat('en-US',{timeZone:z.tz,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());
-    });
-  }
-  tick();
-  setInterval(tick, 1000);
+var zones = [
+{id:'clockLA', tz:'America/Los_Angeles'},
+{id:'clockCHI', tz:'America/Chicago'},
+{id:'clockNY', tz:'America/New_York'}
+];
+function tick(){
+zones.forEach(function(z){
+var el = document.getElementById(z.id);
+if(!el) return;
+el.textContent = new Intl.DateTimeFormat('en-US',{timeZone:z.tz,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());
+});
+}
+tick();
+setInterval(tick, 1000);
 })();
 </script>
 </body>
